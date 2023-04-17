@@ -32,6 +32,10 @@ public class CommonsCollections2 {
      * Q：为什么需要比较器？
      * A：因为可以在比较器中传入invoketransformer
      *
+     * templatesImpl利用
+     * 加载对象需要是com.sun.org.apache.xalan.internal.xsltc.runtime.AbstractTranslet的实现类
+     * 需要设置_name,_bytecodes
+     * _tfactory属性在高版本需要设置，jdk7u21中不是必须，看jdk版本而言-》defineTransletClasses
      *
      * @param args
      */
