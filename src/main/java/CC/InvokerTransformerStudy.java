@@ -138,5 +138,6 @@ public class InvokerTransformerStudy {
         //transform()函数是做判断，传入TrAX，是做判断，判断传入的参数是不是instanceof Class，如果包含就调用newInstance函数，根据Instantiate第二个参数来创建实例
         //TrAX用于将XML文档转换成其他格式
         instantiateTransformer.transform(TrAXFilter.class);
+        ///123123
     }
 }
