@@ -18,6 +18,8 @@ public class CommonsCollections2 {
     /**
      * 利用条件比较苛刻：首先 CommonsCollections3 中无法使用，因为其 TransformingComparator 无法序列化。其次只有 CommonsCollections4-4.0 可以使用，
      * 因为 CommonsCollections4 其他版本去掉了 InvokerTransformer 的 Serializable 继承，导致无法序列化
+     * Apache common3.readObject方法增加了check校验
+     * Apache Common4.2及以上场景中InvokerTransformer禁止了writeObject和readObject
      *
      * ->PriorityQueue.readObject()
      *       ->PriorityQueue.heapify()
@@ -31,6 +33,7 @@ public class CommonsCollections2 {
      * A：因为需要sitedown函数中使用到了比较器，heaify函数中又调用了sitedown函数，而readObject函数又调用了heapify函数
      * Q：为什么需要比较器？
      * A：因为可以在比较器中传入invoketransformer
+     * A：0420更新：需要比较器并不是因为需要传入invoketransformer，是因为需要使用priorityQueue反序列化执行任意命令，有两个条件1、一个是传入的对象需要实现readObejct2、而是实现comparator接口
      *
      * templatesImpl利用
      * 加载对象需要是com.sun.org.apache.xalan.internal.xsltc.runtime.AbstractTranslet的实现类
