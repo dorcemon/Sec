@@ -7,6 +7,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
+//实现Person接口，需要getName、age方法
 public class PersonStub implements Person {
     private final Socket socket;
     private final ObjectOutputStream out;
@@ -21,8 +22,11 @@ public class PersonStub implements Person {
     @Override
     public String getName() {
         try {
+            //我要读取getName，所以将getName作为字符串序列化过去
             out.writeObject("getName");
+            //自己发送结束后，就等待接收
             out.flush();
+            //读取server传过来的对象
             return (String) in.readObject();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();

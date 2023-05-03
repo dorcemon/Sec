@@ -76,6 +76,25 @@
             <version>1.2.17</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.unboundid</groupId>
+            <artifactId>unboundid-ldapsdk</artifactId>
+            <version>3.1.1</version>
+        </dependency>
+
+        <!--tomcat核心组件，包含基本功能-->
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-catalina</artifactId>
+            <version>9.0.20</version>
+        </dependency>
+
+        <!--tomcatjsp引擎-->
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-jasper-el</artifactId>
+            <version>9.0.21</version>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>
@@ -96,6 +115,8 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+
+
         </plugins>
     </build>
 

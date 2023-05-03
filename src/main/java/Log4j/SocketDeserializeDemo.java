@@ -5,7 +5,7 @@ import org.apache.log4j.net.SimpleSocketServer;
 /**
  * CVE-2019-17571
  * Log4j1.2.x<=1.2.17
- * ±¾ÖÊ¾ÍÊÇ¶Ô´Ó socket Á÷ÖÐ»ñÈ¡µÄÊý¾ÝÃ»ÓÐ½øÐÐ¹ýÂË£¬¶øÖ±½Ó·´ÐòÁÐ»¯
+ * æœ¬è´¨å°±æ˜¯å¯¹ä»Ž socket æµä¸­èŽ·å–çš„æ•°æ®æ²¡æœ‰è¿›è¡Œè¿‡æ»¤ï¼Œè€Œç›´æŽ¥ååºåˆ—åŒ–
  * SimpleSocketServer.main()
  *      SocketNode.run()
  *          new ObjectInputStream(new BufferedInputStream(socket.getInputStream())).readObject()

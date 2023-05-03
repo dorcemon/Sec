@@ -2,6 +2,7 @@ package RMI.Demo2;
 
 import java.io.Serializable;
 
+//注意要实现Serializable接口，那么demo1中为什么没有实现serializable接口
 public class User implements Serializable {
 
     private int userId;

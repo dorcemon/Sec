@@ -9,6 +9,7 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+//Skeleton需要传入两个参数，person类和serversocket端口
 public class PersonSkeleton extends Thread {
     private final Person person;
     private final ServerSocket serverSocket;
@@ -26,18 +27,15 @@ public class PersonSkeleton extends Thread {
                  ObjectInputStream in = new ObjectInputStream(socket.getInputStream())) {
                 String methodName = (String) in.readObject();
                 switch (methodName) {
-                    case "getAge":
+                    case "getName":
                         out.writeObject(person.getName());
                         out.flush();
-                        break;
-                    case "getName":
+                    case "getAge":
                         out.writeObject(person.getAge());
                         out.flush();
-                        break;
                     default:
                         out.writeObject(null);
                         out.flush();
-                        break;
                 }
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();

